@@ -34,7 +34,7 @@ public class Test {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
-                        System.out.println("register params ok!");
+                        system.register(params);
                         break;
                     case login:
                         if (params.length != 2){
