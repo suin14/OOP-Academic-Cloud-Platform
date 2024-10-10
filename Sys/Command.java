@@ -1,3 +1,5 @@
+package Sys;
+
 public enum Command {
 
     quit,

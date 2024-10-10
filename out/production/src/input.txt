@@ -1,7 +1,1 @@
-printInfo 1 2 3
-printInfo
-createCourse 1 2 3 4
-listCourse 1
-listCourse
-selectCourse 1
-cancelCourse 1
+quit
