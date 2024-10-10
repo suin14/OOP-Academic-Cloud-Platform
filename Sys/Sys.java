@@ -1,9 +1,13 @@
 package Sys;
 
-import User.Master;
-import User.Student;
+import User.*;
 
 public class Sys {
+    private final UserData userData; // 用户数据管理
+
+    public Sys() {
+        userData = UserData.getInstance(); // 初始化用户数据管理
+    }
 
     public void quit() {
         // TODO：让用户下线
@@ -13,10 +17,12 @@ public class Sys {
     public void register(String[] params) {
         String id = params[0];
         String type = id.substring(0, 2); // 取前两个字符判断类型
+        User person = null; // 用于存储创建的用户对象
+
         switch (type) { // 学工号
             case "SY", "ZY":
                 // 硕士生
-                Master p = new Master(params[0], params[1], params[2], params[3],params[4]);
+                person = new Master(params[0], params[1], params[2], params[3], params[4]);
                 break;
             case "BY":
                 // 博士生
@@ -34,13 +40,15 @@ public class Sys {
                         System.out.println(Feedback.ILLEGAL_USER_ID);
                         return;
                     }
-                }
-                else
-                {
+                } else {
                     System.out.println(Feedback.ILLEGAL_USER_ID);
                     return;
                 }
         }
+
+        userData.createUser(id, person);
+
+
     }
 }
 
