@@ -21,6 +21,7 @@ public class UserData {
 
     public void createUser(String id, User user) {
         userMap.put(id, user);
+        System.out.println(Feedback.REGISTER_SUCCESS);
     }
 
     public boolean hasUser(String id) {

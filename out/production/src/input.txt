@@ -1,2 +1,2 @@
-register SY2137503 amne A@123456 A@123456 Studnt
+register SY2137503 amne A123456 A123456 Student
 quit

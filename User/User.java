@@ -8,56 +8,61 @@ public class User {
     protected String password;
     protected String identityType;
 
-    ; // 用户数据管理
+    UserData userData = UserData.getInstance();
 
-    public User(String id, String name, String password, String checkPwd, String identityType){
-        setId(id);
-        UserData userData = UserData.getInstance();
-        if (userData.hasUser(id)) {
-            System.out.println(Feedback.USER_EXISTS);
-            return;
+    public User(String id, String name, String password, String checkPwd, String identityType) {
+        if (setId(id)) {
+            if (!userData.hasUser(id)) {
+                if (setName(name)) {
+                    if (setPassword(password)) {
+                        if (password.equals(checkPwd)) {
+                            if (setIdentityType(identityType)) {
+                                userData.createUser(id, this);
+                            }
+                        } else {
+                            System.out.println(Feedback.PASSWORD_NOT_MATCH);  //密码与确认密码不一致
+                        }
+                    }
+                }
+            } else {
+                System.out.println(Feedback.USER_EXISTS); // 用户已存在
+            }
         }
-        setName(name);
-        if (!password.equals(checkPwd)) {  // 确认密码与密码不一致
-            System.out.println(Feedback.PASSWORD_NOT_MATCH);
-            return;
-        }
-        setPassword(password);
-        setIdentityType(identityType);
-        System.out.println(Feedback.REGISTER_SUCCESS);
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public boolean setId(String id) {
         this.id = id;
+        return true;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public boolean setName(String name) {
         // 首字符不能为下划线，其余部分只能是字母和下划线
         if (!name.matches("^[A-Za-z][A-Za-z_]{3,15}$")) {
             System.out.println(Feedback.ILLEGAL_USER_NAME);
-            return;
+            return false;
         }
 
         this.name = name;
+        return true;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public boolean setPassword(String password) {
         // 检查长度是否在 6 到 16 之间
         if (password.length() < 6 || password.length() > 16) {
             System.out.println(Feedback.ILLEGAL_PASSWORD);
-            return;
+            return false;
         }
 
         // 正则表达式检查
@@ -67,12 +72,11 @@ public class User {
 
         // 检查三类字符是否至少各有一个
         if (hasLetter && hasDigit && hasSpecial) {
-
             this.password = password;
-
-
+            return true;
         } else {
             System.out.println(Feedback.ILLEGAL_PASSWORD);
+            return false;
         }
     }
 
@@ -80,7 +84,8 @@ public class User {
         return identityType;
     }
 
-    public void setIdentityType(String identityType) {
+    public boolean setIdentityType(String identityType) {
         this.identityType = identityType;
+        return true;
     }
 }

@@ -8,11 +8,13 @@ public class Student extends User{
     }
 
     @Override
-    public void setIdentityType(String identityType) {
+    public boolean setIdentityType(String identityType) {
         if (identityType.equals("Student")) {
             this.identityType = identityType;
+            return true;
         } else {
             System.out.println(Feedback.ILLEGAL_IDENTITY);
+            return false;
         }
     }
 }
