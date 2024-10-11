@@ -1,4 +1,5 @@
 register BY2221118 amne A@123456 A@123456 Student
-login BY2221118     A@12345
 login BY2221118     A@123456
+
+
 quit

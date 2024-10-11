@@ -3,11 +3,20 @@ package Sys;
 import User.*;
 
 public class Sys {
+    private static Sys instance; // 单例实例
     private final UserData userData; // 用户数据管理
-    private User currentUser = null;
+    private User currentUser;
 
-    public Sys() {
-        userData = UserData.getInstance(); // 初始化用户数据管理
+    private Sys() {
+        this.userData = UserData.getInstance(); // 初始化用户数据管理
+        this.currentUser = null; // 初始时没有用户登录
+    }
+
+    public static Sys getInstance() {
+        if (instance == null) {
+            instance = new Sys();
+        }
+        return instance;
     }
 
     public void quit() {

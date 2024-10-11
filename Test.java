@@ -9,7 +9,7 @@ public class Test {
         File inputFile = new File("input.txt"); Scanner scan = new Scanner(inputFile);
 //        Scanner scan = new Scanner(System.in);
         String input;
-        Sys system = new Sys();
+        Sys system = Sys.getInstance();
 
         while(true) {
             input = scan.nextLine().trim();
@@ -22,72 +22,71 @@ public class Test {
 
             try {
                 switch (Command.valueOf(command)) {
-                    case quit: // 退出系统
-                        if (params.length != 0){
+                    case quit -> { // 退出系统
+                        if (params.length != 0) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
                         system.quit();
                         return;
-                    case register:
-                        if (params.length != 5){
+                    }
+                    case register -> {
+                        if (params.length != 5) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
                         system.register(params);
-                        break;
-                    case login:
-                        if (params.length != 2){
+                    }
+                    case login -> {
+                        if (params.length != 2) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
                         system.login(params);
-                        break;
-                    case logout:
-                        if (params.length != 1){
+                    }
+                    case logout -> {
+                        if (params.length != 1) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
                         System.out.println("logout params ok!");
-                        break;
-                    case printInfo:
-                        if (params.length == 0){
+                    }
+                    case printInfo -> {
+                        if (params.length == 0) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
                         System.out.println("params ok!");
-                        break;
-                    case createCourse:
-                        if (params.length != 4){
+                    }
+                    case createCourse -> {
+                        if (params.length != 4) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
                         System.out.println("params ok!");
-                        break;
-                    case listCourse:
-                        if (params.length == 0){
+                    }
+                    case listCourse -> {
+                        if (params.length == 0) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
                         System.out.println("params ok!");
-                        break;
-                    case selectCourse:
-                        if (params.length != 1){
+                    }
+                    case selectCourse -> {
+                        if (params.length != 1) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
                         System.out.println("params ok!");
-                        break;
-                    case cancelCourse:
-                        if (params.length != 1){
+                    }
+                    case cancelCourse -> {
+                        if (params.length != 1) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
                         System.out.println("params ok!");
-                        break;
-                    default:
-                        System.out.println("Command '" + command + "' not found");
-                        break;
+                    }
+                    default -> System.out.println("Command '" + command + "' not found");
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println("Command '" + command + "' not found");
