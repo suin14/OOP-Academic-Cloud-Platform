@@ -1,5 +1,6 @@
 package User;
 
+import Course.Course;
 import Sys.Feedback;
 
 public class Administrator extends User {
@@ -33,7 +34,7 @@ public class Administrator extends User {
     @Override
     public void listTeacherCourse(String id){
         // 课程不存在
-        if (courseList.getCount() == 0) {
+        if (!courseList.hasCourse(id)) {
             System.out.println(Feedback.COURSE_NOT_EXIST);
             return;
         }
@@ -57,7 +58,6 @@ public class Administrator extends User {
             System.out.println(Feedback.NOT_TEACHER);
             return;
         }
-
         user.listCourse();
     }
 }

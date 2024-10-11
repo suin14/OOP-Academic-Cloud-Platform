@@ -54,12 +54,15 @@ public class CourseList {
                     + course.getCredit() + " "
                     + course.getPeriod());
         }
-
         System.out.println(Feedback.LIST_COURSE_SUCCESS);
     }
 
-    public void removeCourse(Course course) {
-        courseList.remove(course);
+    public boolean removeCourse(Course course) {
+        if (hasCourse(course.getCourseID())) {
+            courseList.remove(course.getCourseID());
+            return true;
+        }
+        return false;
     }
 
     public Collection<Course> values() {
@@ -70,4 +73,7 @@ public class CourseList {
         return courseList.get(CourseID);
     }
 
+    public boolean isEmpty() {
+        return courseList.isEmpty();
+    }
 }

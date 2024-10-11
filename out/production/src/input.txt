@@ -5,14 +5,15 @@ register AD001 amne A@123456 A@123456 Administrator
 
 login 10000      A@123456
 createCourse Al_1 2_1-2 2 32
-login 20000      A@123456
-createCourse Al_1 2_1-2 2 32
-
+createCourse Al_2 1_1-2 2 32
+logout
 
 login SY2221118       A@123456
 selectCourse C-1
-selectCourse C-2
 
+login 10000      A@123456
+cancelCourse C-1
+listCourse
 
 
 

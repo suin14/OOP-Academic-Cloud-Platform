@@ -11,13 +11,9 @@ import java.util.List;
 
 public class Teacher extends User {
 
-    private final CourseList courseList;
-    private ArrayList<Course> courses;
 
     public Teacher(String id, String name, String password, String checkPwd, String identityType) {
         super(id, name, password, checkPwd, identityType);
-        this.courses = new ArrayList<>();
-        this.courseList = CourseList.getInstance();
     }
 
     @Override
@@ -55,13 +51,13 @@ public class Teacher extends User {
     @Override
     public void createCourse(String courseName, String courseTime, double credit, int period){
         if (getCountCourses() >= 10) {
-            System.out.println(Feedback.COURSE_COUNT_REACHES_LIMIT);  //拥有课程已达最大数
+            System.out.println(Feedback.COURSE_COUNT_REACHES_LIMIT);  // 拥有课程已达最大数
             return;
         }
 
         String id = generateCourseId(courseList.getCount());
 
-        Course c = new Course(this.getName(), id, courseName, courseTime, credit, period, 0);
+        Course c = new Course(getId(), getName(), id, courseName, courseTime, credit, period, 0);
 
         // 检查课程名
         if (!c.isValidCourseName(courseName)) {
@@ -133,8 +129,20 @@ public class Teacher extends User {
                     + course.getCredit() + " "
                     + course.getPeriod());
         }
-
         System.out.println(Feedback.LIST_COURSE_SUCCESS);
+    }
+
+    @Override
+    public boolean removeCourse(Course course) {
+        if (courses.remove(course)) {
+            courseList.removeCourse(course);
+            for (Student student : userData.getAllStudents()) {
+                student.removeCourse(course);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

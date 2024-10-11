@@ -3,25 +3,29 @@ package User;
 import Course.*;
 import Sys.Feedback;
 
+import java.util.ArrayList;
+
 public class User {
     protected String id;
     protected String name;
     protected String password;
     protected String identityType;
-    protected boolean login = false;
+    private boolean login = false;
 
     protected UserData userData;
     protected CourseList courseList;
 
+    protected ArrayList<Course> courses;
+
     public User(String id, String name, String password, String checkPwd, String identityType) {
         this.userData = UserData.getInstance();
         this.courseList = CourseList.getInstance();
-
-        if (!setId(id)) return;
+        this.courses = new ArrayList<>();
         if (userData.hasUser(id)) {
             System.out.println(Feedback.USER_EXISTS);
             return;
         }
+        if (!setId(id)) return;
         if (!setName(name)) return;
         if (!setPassword(password)) return;
         if (!password.equals(checkPwd)) {
@@ -32,6 +36,7 @@ public class User {
 
         userData.createUser(id, this);
     }
+
 
     public String getId() {
         return id;
@@ -117,7 +122,7 @@ public class User {
     }
 
     public void listCourse() {
-        if (courseList.getCount() == 0) {
+        if (courseList.isEmpty()) {
             System.out.println(Feedback.COURSE_NOT_EXIST);
             return;
         }
@@ -125,16 +130,16 @@ public class User {
     }
 
     public void listTeacherCourse(String id){
-        // 课程不存在
-        if (courseList.getCount() == 0) {
-            System.out.println(Feedback.COURSE_NOT_EXIST);
-            return;
-        }
         System.out.println(Feedback.PERMISSION_DENIED);
     }
 
     public void selectCourse(Course course) {
         System.out.println(Feedback.PERMISSION_DENIED);
+    }
+
+    public boolean removeCourse(Course course) {
+        System.out.println(Feedback.PERMISSION_DENIED);
+        return false;
     }
 
 }

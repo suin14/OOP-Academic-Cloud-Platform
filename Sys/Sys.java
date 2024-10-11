@@ -243,7 +243,6 @@ public class Sys {
 //        }
 
         currentUser.selectCourse(c);
-
     }
 
     public boolean isValidCourseId(String courseId) {
@@ -265,6 +264,37 @@ public class Sys {
     }
 
     public void cancelCourse(String[] params) {
+        if (notLogin()) {
+            System.out.println(Feedback.NOT_ONLINE);
+            return;
+        }
+        String CourseID = params[0];
+        if (!isValidCourseId(CourseID)) {
+            System.out.println(Feedback.ILLEGAL_COURSE_ID);
+            return;
+        }
+        Course c = courseList.findCourse(CourseID);
+        // 对于管理员
+        if (checkPermission("Administrator")) {
+            User t = userData.findUser(c.getTeacherID());
+            if (!t.removeCourse(c)) {
+                return;
+            }
+            for (Student student : userData.getAllStudents()) {
+                student.removeCourse(c);
+            }
+            if (!courseList.removeCourse(c)) {
+                System.out.println(Feedback.COURSE_NOT_EXIST);
+                return;
+            }
+            System.out.println("Cancel course success (courseId: " + c.getCourseID() + ")");
+        } else {  // 对于老师或学生
+            if (!currentUser.removeCourse(c)) {
+                System.out.println(Feedback.COURSE_NOT_EXIST);
+                return;
+            }
+            System.out.println("Cancel course success (courseId: " + c.getCourseID() + ")");
+        }
     }
 
     public boolean notLogin() {

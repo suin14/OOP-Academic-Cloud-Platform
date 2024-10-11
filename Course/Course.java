@@ -9,13 +9,15 @@ public class Course {
     private String time;
     private double credit;
     private int period;
+    private String teacherID;
 
     private String teacherName;
 
     private int studentsCount; // 学生人数
 
 
-    public Course(String teacherName, String id, String courseName, String time, double credit, int period, int students) {
+    public Course(String teacherID, String teacherName, String id, String courseName, String time, double credit, int period, int students) {
+        setTeacherID(teacherID);
         setTeacherName(teacherName);
         setCourseID(id);
         setCourseName(courseName);
@@ -23,6 +25,14 @@ public class Course {
         setCredit(credit);
         setPeriod(period);
         setStudentsCount(students);
+    }
+
+    public String getTeacherID() {
+        return teacherID;
+    }
+
+    public void setTeacherID(String teacherID) {
+        this.teacherID = teacherID;
     }
 
     public String getCourseID() {

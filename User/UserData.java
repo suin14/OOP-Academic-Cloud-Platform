@@ -2,14 +2,16 @@ package User;
 
 import Sys.Feedback;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class UserData {
     private static UserData instance;
-    private final HashMap<String, User> userMap;
+    private final HashMap<String, User> users;
 
     private UserData() {
-        userMap = new HashMap<>();
+        users = new HashMap<>();
     }
 
     public static UserData getInstance() {
@@ -20,20 +22,20 @@ public class UserData {
     }
 
     public void createUser(String id, User user) {
-        userMap.put(id, user);
+        users.put(id, user);
         System.out.println(Feedback.REGISTER_SUCCESS);
     }
 
     public boolean hasUser(String id) {
-        return userMap.containsKey(id);
+        return users.containsKey(id);
     }
 
     public User findUser(String id) {
-        return userMap.get(id);
+        return users.get(id);
     }
 
     public void removeUser(String id) {
-        userMap.remove(id);
+        users.remove(id);
     }
 
     public boolean loginUser(String id) {
@@ -48,5 +50,15 @@ public class UserData {
     public void logoutUser(String id) {
         findUser(id).setLogout();
         System.out.println(id + " Bye~");
+    }
+
+    public List<Student> getAllStudents() {
+        List<Student> students = new ArrayList<>();
+        for (User user : users.values()) {
+            if (user.getIdentityType().equals("Student")) {
+                students.add((Student) user);
+            }
+        }
+        return students;
     }
 }

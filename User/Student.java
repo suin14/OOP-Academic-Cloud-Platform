@@ -7,11 +7,10 @@ import Sys.Sys;
 import java.util.ArrayList;
 
 public class Student extends User{
-    private ArrayList<Course> courses;
+
 
     public Student(String id, String name, String password, String checkPwd, String identityType) {
         super(id, name, password, checkPwd, identityType);
-        this.courses = new ArrayList<>();
     }
 
     @Override
@@ -64,5 +63,10 @@ public class Student extends User{
             return (newStart <= existingEnd && newEnd >= existingStart);
         }
         return false;
+    }
+
+    @Override
+    public boolean removeCourse(Course course) {
+        return courses.remove(course);
     }
 }
