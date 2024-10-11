@@ -41,7 +41,7 @@ public class Test {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
-                        System.out.println("login params ok!");
+                        system.login(params);
                         break;
                     case logout:
                         if (params.length != 1){

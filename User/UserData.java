@@ -35,4 +35,13 @@ public class UserData {
     public void removeUser(String id) {
         userMap.remove(id);
     }
+
+    public boolean loginUser(String id) {
+        if (userMap.get(id).isLogin()) {
+            System.out.println(id + " is online");
+            return false;
+        }
+        userMap.get(id).setLogin();
+        return true;
+    }
 }

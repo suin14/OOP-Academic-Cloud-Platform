@@ -1,12 +1,14 @@
 package User;
 
 import Sys.Feedback;
+import Sys.Sys;
 
 public class User {
     protected String id;
     protected String name;
     protected String password;
     protected String identityType;
+    protected boolean login = false;
 
     UserData userData = UserData.getInstance();
 
@@ -87,5 +89,13 @@ public class User {
     public boolean setIdentityType(String identityType) {
         this.identityType = identityType;
         return true;
+    }
+
+    public boolean isLogin() {
+        return login;
+    }
+
+    public void setLogin() {
+        this.login = true;
     }
 }
