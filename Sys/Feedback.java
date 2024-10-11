@@ -15,6 +15,7 @@ public class Feedback {
     public static final String PERMISSION_DENIED = "Permission denied";
     public static final String COURSE_COUNT_REACHES_LIMIT = "Course count reaches limit";
     public static final String ILLEGAL_COURSE_NAME = "Illegal course name";
+    public static final String ILLEGAL_COURSE_ID = "Illegal course id";
     public static final String COURSE_NAME_EXISTS = "Course name exists";
     public static final String ILLEGAL_COURSE_TIME = "Illegal course time";
     public static final String COURSE_TIME_CONFLICTS = "Course time conflicts";
@@ -23,5 +24,6 @@ public class Feedback {
     public static final String LIST_COURSE_SUCCESS = "List course success";
     public static final String COURSE_NOT_EXIST = "Course does not exist";
     public static final String NOT_TEACHER = "User id does not belong to a Teacher";
+
 }
 

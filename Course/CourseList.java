@@ -31,11 +31,11 @@ public class CourseList {
     }
 
     public void addCourse(Course course) {
-        courseList.put(course.getCourseName(), course);
+        courseList.put(course.getCourseID(), course);
     }
 
-    public boolean hasCourse(String courseName) {
-        return courseList.containsKey(courseName);
+    public boolean hasCourse(String courseID) {
+        return courseList.containsKey(courseID);
     }
 
     public void printCourseList() {
@@ -65,4 +65,9 @@ public class CourseList {
     public Collection<Course> values() {
         return courseList.values();
     }
+
+    public Course findCourse(String CourseID) {
+        return courseList.get(CourseID);
+    }
+
 }

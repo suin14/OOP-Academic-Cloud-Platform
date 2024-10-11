@@ -61,7 +61,7 @@ public class Teacher extends User {
 
         String id = generateCourseId(courseList.getCount());
 
-        Course c = new Course(this.getName(), id, courseName, courseTime, credit, period);
+        Course c = new Course(this.getName(), id, courseName, courseTime, credit, period, 0);
 
         // 检查课程名
         if (!c.isValidCourseName(courseName)) {
@@ -105,7 +105,7 @@ public class Teacher extends User {
         courses.add(c);
         courseList.addCourse(c);
         courseList.addCount();
-        System.out.println("Create course success (courseId: " + c.getCourseName() + ")");
+        System.out.println("Create course success (courseId: " + c.getCourseID() + ")");
     }
 
     public static String generateCourseId(int num) {

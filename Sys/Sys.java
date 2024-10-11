@@ -1,16 +1,19 @@
 package Sys;
 
+import Course.*;
 import User.*;
 
 public class Sys {
     private final UserData userData;  // 用户数据
     private User currentUser;
     private OnlineUser onlineUser;  //在线用户列表
+    private CourseList courseList;
 
     public Sys() {
-        this.userData = UserData.getInstance();
         this.currentUser = null;
+        this.userData = UserData.getInstance();
         this.onlineUser = OnlineUser.getInstance();
+        this.courseList = CourseList.getInstance();
     }
 
     public void quit() {
@@ -218,6 +221,47 @@ public class Sys {
 
 
     public void selectCourse(String[] params) {
+        if (notLogin()) {
+            System.out.println(Feedback.NOT_ONLINE);
+            return;
+        }
+        String CourseID = params[0];
+        if (!isValidCourseId(CourseID)) {
+            System.out.println(Feedback.ILLEGAL_COURSE_ID);
+            return;
+        }
+
+        if (!courseList.hasCourse(CourseID)) {
+            System.out.println(Feedback.COURSE_NOT_EXIST);
+            return;
+        }
+        Course c = courseList.findCourse(CourseID);
+
+        // 课程是否已经满 TODO
+//        if (c.isFull()) {
+//            return;
+//        }
+
+        currentUser.selectCourse(c);
+
+    }
+
+    public boolean isValidCourseId(String courseId) {
+        // 检查格式是否为 C-数字
+        if (!courseId.matches("C-\\d+")) {
+            return false;
+        }
+
+        // 获取数字部分并转换为整数
+        String numberPart = courseId.substring(2);
+        int number = Integer.parseInt(numberPart);
+
+        // 检查数字是否大于0
+        if (number <= 0) {
+            return false;
+        }
+
+        return true;
     }
 
     public void cancelCourse(String[] params) {

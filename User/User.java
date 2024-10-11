@@ -133,4 +133,8 @@ public class User {
         System.out.println(Feedback.PERMISSION_DENIED);
     }
 
+    public void selectCourse(Course course) {
+        System.out.println(Feedback.PERMISSION_DENIED);
+    }
+
 }

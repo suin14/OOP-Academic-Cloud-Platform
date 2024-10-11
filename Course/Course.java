@@ -12,14 +12,17 @@ public class Course {
 
     private String teacherName;
 
+    private int studentsCount; // 学生人数
 
-    public Course(String teacherName, String id, String courseName, String time, double credit, int period) {
+
+    public Course(String teacherName, String id, String courseName, String time, double credit, int period, int students) {
         setTeacherName(teacherName);
         setCourseID(id);
         setCourseName(courseName);
         setTime(time);
         setCredit(credit);
         setPeriod(period);
+        setStudentsCount(students);
     }
 
     public String getCourseID() {
@@ -68,6 +71,25 @@ public class Course {
 
     public void setPeriod(int period) {
         this.period = period;
+    }
+
+    public int getStudentsCount() {
+        return studentsCount;
+    }
+
+    public void setStudentsCount(int studentsCount) {
+        this.studentsCount = studentsCount;
+    }
+
+    public void addStudent() {
+        this.studentsCount += 1;
+    }
+
+    public boolean isFull() {
+        if (this.studentsCount == 30) {  // 每一门课的上限为30人
+            return true;
+        }
+        return false;
     }
 
     public boolean isValidCourseName(String courseName) {
