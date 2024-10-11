@@ -159,6 +159,9 @@ public class Sys {
                 return;
             }
             userData.logoutUser(id);
+            if(currentUser.getId().equals(id)) {
+                currentUser = null;
+            }
         }
     }
 
@@ -187,6 +190,18 @@ public class Sys {
             }
             System.out.println(user.toString());
         }
+    }
+
+    public void createCourse(String[] params) {
+    }
+
+    public void listCourse(String[] params) {
+    }
+
+    public void selectCourse(String[] params) {
+    }
+
+    public void cancelCourse(String[] params) {
     }
 }
 
