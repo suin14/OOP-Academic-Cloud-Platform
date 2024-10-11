@@ -3,6 +3,9 @@ package Sys;
 import Course.*;
 import User.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Sys {
     private final UserData userData;  // 用户数据
     private User currentUser;
@@ -17,11 +20,17 @@ public class Sys {
     }
 
     public void quit() {
-        for (User user : this.onlineUser.getOnlineUserList()) {
+        List<User> onlineUsers = new ArrayList<>(onlineUser.getOnlineUserList()); // 创建副本
+        if (onlineUsers.isEmpty()) {
+            return;
+        }
+
+        for (User user : onlineUsers) {
             userData.logoutUser(user.getId());
         }
         System.out.println("----- Good Bye! -----");
     }
+
 
     public void register(String[] params) {
         String id = params[0];

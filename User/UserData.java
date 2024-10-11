@@ -1,6 +1,7 @@
 package User;
 
 import Sys.Feedback;
+import Sys.OnlineUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,9 +10,11 @@ import java.util.List;
 public class UserData {
     private static UserData instance;
     private final HashMap<String, User> users;
+    private OnlineUser onlineUser;
 
     private UserData() {
         users = new HashMap<>();
+        this.onlineUser = OnlineUser.getInstance();
     }
 
     public static UserData getInstance() {
@@ -48,7 +51,9 @@ public class UserData {
     }
 
     public void logoutUser(String id) {
-        findUser(id).setLogout();
+        User user = findUser(id);
+        user.setLogout();
+        onlineUser.removeUser(user);
         System.out.println(id + " Bye~");
     }
 

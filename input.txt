@@ -1,20 +1,28 @@
-register 10000 amne A@123456 A@123456 Teacher
-register 20000 Leen A@123456 A@123456 Teacher
-register SY2221118 amne A@123456 A@123456 Student
-register AD001 amne A@123456 A@123456 Administrator
-
-login 10000      A@123456
-createCourse Al_1 2_1-2 2 32
-createCourse Al_2 1_1-2 2 32
+register 22373001 Mu_Jue Aa123@ Aa123@ Student
+register 00001 T_ea Bb123$ Bb123$ Teacher
+login 22373001 Aa123@
+createCourse OO 4_3-4 3.0 48
 logout
-
-login SY2221118       A@123456
+login 00001 Bb123$
+createCourse 8*&&@!
+createCourse _OO 4_3-4 3.0 48
+createCourse A*XXXX 1_2-3 4.5 72
+createCourse OO 4_3-4 3.0 48
+createCourse CO 5_3-4 4.5 72
+listCourse
+logout
+login 22373001 Aa123@
+listCourse
+selectCourse C-0
+selectCourse C-2222222
 selectCourse C-1
-
-login 10000      A@123456
+selectCourse C-2
+logout
+login 00001 Bb123$
+cancelCourse C-0
 cancelCourse C-1
 listCourse
-
-
-
+logout
+login 22373001 Aa123@
+listCourse
 quit
