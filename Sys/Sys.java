@@ -17,33 +17,30 @@ public class Sys {
     public void register(String[] params) {
         String id = params[0];
         String type = id.substring(0, 2); // 取前两个字符判断类型
-        User person = null; // 用于存储创建的用户对象
 
         switch (type) { // 学工号
-            case "SY", "ZY":
-                // 硕士生
-                person = new Master(params[0], params[1], params[2], params[3], params[4]);
-                break;
-            case "BY":
-                // 博士生
-                break;
-            case "AD":
-                // 教职工
-                break;
-            default:
+            case "SY", "ZY" -> {
+                Master m = new Master(params[0], params[1], params[2], params[3], params[4]);
+            }
+            case "BY" -> {
+                Doctoral d = new Doctoral(params[0], params[1], params[2], params[3], params[4]);
+            }
+            case "AD" -> {
+                Administrator a = new Administrator(params[0], params[1], params[2], params[3], params[4]);
+            }
+            default -> {
                 if (id.matches("^[0-9].*")) {
                     if (id.length() == 8) {
-                        // 本科生
+                        Undergraduate u = new Undergraduate(params[0], params[1], params[2], params[3], params[4]);
                     } else if (id.length() == 5) {
-                        // 教职工
+                        Teacher t = new Teacher(params[0], params[1], params[2], params[3], params[4]);
                     } else {
                         System.out.println(Feedback.ILLEGAL_USER_ID);
-                        return;
                     }
                 } else {
                     System.out.println(Feedback.ILLEGAL_USER_ID);
-                    return;
                 }
+            }
         }
 
 

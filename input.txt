@@ -1,2 +1,9 @@
-register SY2137503 amne A123456 A123456 Student
+register BY2221118 amne A@123456 A@123456 Student
+register BY2221118 amne A@123456 A@123456
+register BY2621118 amne A@123456 A@123456 Student
+register BY2221118 amne A@123456 A@123456 Student
+register BY2121118 amne1 A@123456 A@123456 Student
+register BY2121118 amne @123456 A@123456 Student
+register BY2121118 amne A@123456 A123456 Student
+register BY2121118 amne A@123456 A@123456 Teacher
 quit
