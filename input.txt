@@ -1,6 +1,5 @@
-register 11111111111 Mu_Jue Aa123@ Aa123@ Student
-
-
-
+register 223aa001 D_sad Aa123@ Aa123@ Studesnt
+register 2237300a Mu_Jue 123Aa@ 123Aa@ Student
+register BY223730a Mu_Jue 123Aa@ 123Aa@ Student
 
 quit
