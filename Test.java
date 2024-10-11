@@ -45,18 +45,18 @@ public class Test {
                         system.login(params);
                     }
                     case logout -> {
-                        if (params.length != 1) {
+                        if (params.length > 1) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
-                        System.out.println("logout params ok!");
+                        system.logout(params);
                     }
                     case printInfo -> {
-                        if (params.length == 0) {
+                        if (params.length > 1) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
-                        System.out.println("params ok!");
+                        system.printInfo(params);
                     }
                     case createCourse -> {
                         if (params.length != 4) {

@@ -44,4 +44,9 @@ public class UserData {
         userMap.get(id).setLogin();
         return true;
     }
+
+    public void logoutUser(String id) {
+        findUser(id).setLogout();
+        System.out.println(id + " Bye~");
+    }
 }

@@ -11,6 +11,8 @@ public class Feedback {
     public static final String ILLEGAL_IDENTITY = "Illegal identity";
     public static final String USER_NOT_EXISTS = "User does not exist";
     public static final String WRONG_PASSWORD = "Wrong password";
+    public static final String NOT_ONLINE = "No one is online";
+    public static final String PERMISSION_DENIED = "Permission denied";
 
 }
 

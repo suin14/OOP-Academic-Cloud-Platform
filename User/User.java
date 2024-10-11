@@ -1,7 +1,6 @@
 package User;
 
 import Sys.Feedback;
-import Sys.Sys;
 
 public class User {
     protected String id;
@@ -97,5 +96,17 @@ public class User {
 
     public void setLogin() {
         this.login = true;
+    }
+
+    public void setLogout() {
+        this.login = false;
+    }
+
+    @Override
+    public String toString() {
+        return "User id: " + getId() + "\n" +
+                "Name: " + getName() + "\n" +
+                "Type: " + getIdentityType() + "\n" +
+                "Print information success";
     }
 }

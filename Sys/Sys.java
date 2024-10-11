@@ -130,5 +130,63 @@ public class Sys {
 
         return false;
     }
+
+    public void logout(String[] params) {
+        if (currentUser == null) {
+            System.out.println(Feedback.NOT_ONLINE);  //当前无用户在线
+            return;
+        }
+        if (params.length == 0) {
+            String id = currentUser.getId();
+            userData.logoutUser(currentUser.getId());
+            currentUser = null;
+        } else if (params.length == 1) {
+            String id = params[0];
+            if (!currentUser.getIdentityType().equals("Administrator")) {  //只能管理员操作
+                System.out.println(Feedback.PERMISSION_DENIED);
+                return;
+            }
+            if (!checkId(id)) {
+                System.out.println(Feedback.ILLEGAL_USER_ID);
+                return;
+            }
+            if (!userData.hasUser(id)) {
+                System.out.println(Feedback.USER_NOT_EXISTS);
+                return;
+            }
+            if (!userData.findUser(id).isLogin()) {
+                System.out.println(id + " is not online");  // 学工号对应的用户不在线
+                return;
+            }
+            userData.logoutUser(id);
+        }
+    }
+
+    public void printInfo(String[] params) {
+        if (currentUser == null) {
+            System.out.println(Feedback.NOT_ONLINE);  //当前无用户在线
+            return;
+        }
+        if (params.length == 0) {  // 打印当前用户的个人信息
+            User user = userData.findUser(currentUser.getId());
+            System.out.println(user.toString());
+        } else if (params.length == 1) {  //打印他人信息
+            String id = params[0];
+            User user = userData.findUser(id);
+            if (!currentUser.getIdentityType().equals("Administrator")) {  //只能管理员操作
+                System.out.println(Feedback.PERMISSION_DENIED);
+                return;
+            }
+            if (!checkId(id)) {
+                System.out.println(Feedback.ILLEGAL_USER_ID);
+                return;
+            }
+            if (!userData.hasUser(id)) {
+                System.out.println(Feedback.USER_NOT_EXISTS);
+                return;
+            }
+            System.out.println(user.toString());
+        }
+    }
 }
 
