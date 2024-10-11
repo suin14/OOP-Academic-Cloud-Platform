@@ -63,36 +63,34 @@ public class Test {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
-                        System.out.println("params ok!");
+                        system.createCourse(params);
                     }
                     case listCourse -> {
                         if (params.length == 0) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
-                        System.out.println("params ok!");
+                        system.listCourse(params);
                     }
                     case selectCourse -> {
                         if (params.length != 1) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
-                        System.out.println("params ok!");
+                        system.selectCourse(params);
                     }
                     case cancelCourse -> {
                         if (params.length != 1) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }
-                        System.out.println("params ok!");
+                        system.cancelCourse(params);
                     }
                     default -> System.out.println("Command '" + command + "' not found");
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println("Command '" + command + "' not found");
             }
-
-//            System.out.println(String.join(", ", params));
         }
     }
 
