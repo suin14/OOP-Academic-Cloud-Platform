@@ -3,20 +3,12 @@ package Sys;
 import User.*;
 
 public class Sys {
-    private static Sys instance; // 单例实例
-    private final UserData userData; // 用户数据管理
+    private final UserData userData;  // 用户数据
     private User currentUser;
 
-    private Sys() {
-        this.userData = UserData.getInstance(); // 初始化用户数据管理
-        this.currentUser = null; // 初始时没有用户登录
-    }
-
-    public static Sys getInstance() {
-        if (instance == null) {
-            instance = new Sys();
-        }
-        return instance;
+    public Sys() {
+        this.userData = UserData.getInstance();
+        this.currentUser = null;
     }
 
     public void quit() {
@@ -28,7 +20,7 @@ public class Sys {
         String id = params[0];
         String type = id.substring(0, 2); // 取前两个字符判断类型
 
-        switch (type) { // 学工号
+        switch (type) {
             case "SY", "ZY" -> {
                 Master m = new Master(params[0], params[1], params[2], params[3], params[4]);
             }

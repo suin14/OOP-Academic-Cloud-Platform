@@ -9,7 +9,7 @@ public class Test {
         File inputFile = new File("input.txt"); Scanner scan = new Scanner(inputFile);
 //        Scanner scan = new Scanner(System.in);
         String input;
-        Sys system = Sys.getInstance();
+        Sys system = new Sys();
 
         while(true) {
             input = scan.nextLine().trim();

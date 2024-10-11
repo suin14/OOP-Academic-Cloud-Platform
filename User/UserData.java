@@ -5,7 +5,7 @@ import Sys.Feedback;
 import java.util.HashMap;
 
 public class UserData {
-    private static UserData instance; // 单例实例
+    private static UserData instance;
     private final HashMap<String, User> userMap;
 
     private UserData() {
