@@ -134,7 +134,7 @@ public class Sys {
     }
 
     public void logout(String[] params) {
-        if (currentUser == null) {
+        if (notLogin()) {
             System.out.println(Feedback.NOT_ONLINE);  //当前无用户在线
             return;
         }
@@ -173,7 +173,7 @@ public class Sys {
     }
 
     public void printInfo(String[] params) {
-        if (currentUser == null) {
+        if (notLogin()) {
             System.out.println(Feedback.NOT_ONLINE);  //当前无用户在线
             return;
         }
@@ -204,15 +204,27 @@ public class Sys {
     }
 
     public void listCourse(String[] params) {
+        if (notLogin()) {
+            System.out.println(Feedback.NOT_ONLINE);
+            return;
+        }
         if (params.length == 0) {
             currentUser.listCourse();
+        } else if (params.length == 1) {
+            String teacherId = params[0];
+            currentUser.listTeacherCourse(teacherId);
         }
     }
+
 
     public void selectCourse(String[] params) {
     }
 
     public void cancelCourse(String[] params) {
+    }
+
+    public boolean notLogin() {
+        return this.currentUser == null;
     }
 }
 

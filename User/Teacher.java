@@ -22,8 +22,15 @@ public class Teacher extends User {
 
     @Override
     public boolean setId(String id) {
-        if (id.matches("\\d{5}") && Integer.parseInt(id) >= 1 && Integer.parseInt(id) <= 99999) {
+        if (isValidId(id)) {
             this.id = id;
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isValidId(String id) {
+        if (id.matches("\\d{5}") && Integer.parseInt(id) >= 1 && Integer.parseInt(id) <= 99999) {
             return true;
         }
         System.out.println(Feedback.ILLEGAL_USER_ID);
@@ -102,11 +109,17 @@ public class Teacher extends User {
     }
 
     public static String generateCourseId(int num) {
+        num += 1;
         return "C-" + num;
     }
 
     @Override
     public void listCourse() {
+        if (courses.size() == 0) {
+            System.out.println(Feedback.COURSE_NOT_EXIST);
+            return;
+        }
+
         // 按老师姓名和课程编号排序
         this.courses.sort(Comparator.comparing(Course::getTeacherName)
                 .thenComparing(Course::getCourseID));

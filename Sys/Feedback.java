@@ -21,7 +21,7 @@ public class Feedback {
     public static final String ILLEGAL_COURSE_CREDIT = "Illegal course credit";
     public static final String ILLEGAL_COURSE_PERIOD = "Illegal course period";
     public static final String LIST_COURSE_SUCCESS = "List course success";
-
-
+    public static final String COURSE_NOT_EXIST = "Course does not exist";
+    public static final String NOT_TEACHER = "User id does not belong to a Teacher";
 }
 

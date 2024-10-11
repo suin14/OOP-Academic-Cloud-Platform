@@ -10,8 +10,8 @@ public class User {
     protected String identityType;
     protected boolean login = false;
 
-    private final UserData userData;
-    private final CourseList courseList;
+    protected UserData userData;
+    protected CourseList courseList;
 
     public User(String id, String name, String password, String checkPwd, String identityType) {
         this.userData = UserData.getInstance();
@@ -117,6 +117,20 @@ public class User {
     }
 
     public void listCourse() {
+        if (courseList.getCount() == 0) {
+            System.out.println(Feedback.COURSE_NOT_EXIST);
+            return;
+        }
         courseList.printCourseList();
     }
+
+    public void listTeacherCourse(String id){
+        // 课程不存在
+        if (courseList.getCount() == 0) {
+            System.out.println(Feedback.COURSE_NOT_EXIST);
+            return;
+        }
+        System.out.println(Feedback.PERMISSION_DENIED);
+    }
+
 }

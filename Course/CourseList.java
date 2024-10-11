@@ -12,7 +12,7 @@ public class CourseList {
 
     private CourseList() {
         courseList = new HashMap<>();
-        count = 1; 
+        count = 0;
     }
 
     public static CourseList getInstance() {
