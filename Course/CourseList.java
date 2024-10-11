@@ -1,13 +1,18 @@
 package Course;
 
-import java.util.HashMap;
+import Sys.Feedback;
+
+import java.util.*;
 
 public class CourseList {
     private static CourseList instance;
-    private final HashMap<String, Course> CourseList;
+    private final HashMap<String, Course> courseList;
+    
+    private int count;
 
     private CourseList() {
-        CourseList = new HashMap<>();
+        courseList = new HashMap<>();
+        count = 1; 
     }
 
     public static CourseList getInstance() {
@@ -17,24 +22,47 @@ public class CourseList {
         return instance;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void addCount() {
+        this.count += 1;
+    }
+
     public void addCourse(Course course) {
-        CourseList.put(course.getCourseName(), course);
+        courseList.put(course.getCourseName(), course);
     }
 
     public boolean hasCourse(String courseName) {
-        return CourseList.containsKey(courseName);
+        return courseList.containsKey(courseName);
     }
 
-    public HashMap<String, Course> getCourseList() {
-        return CourseList;
+    public void printCourseList() {
+        List<Course> courses = new ArrayList<>(courseList.values());
+
+        // 按老师姓名和课程编号排序
+        courses.sort(Comparator.comparing(Course::getTeacherName)
+                .thenComparing(Course::getCourseID));
+
+        // 打印输出
+        for (Course course : courses) {
+            System.out.println(course.getTeacherName() + " "
+                    + course.getCourseID() + " "
+                    + course.getCourseName() + " "
+                    + course.getTime() + " "
+                    + course.getCredit() + " "
+                    + course.getPeriod());
+        }
+
+        System.out.println(Feedback.LIST_COURSE_SUCCESS);
     }
 
     public void removeCourse(Course course) {
-        CourseList.remove(course);
+        courseList.remove(course);
     }
 
-    public int getCountCourse() {
-        return CourseList.size();
+    public Collection<Course> values() {
+        return courseList.values();
     }
-
 }

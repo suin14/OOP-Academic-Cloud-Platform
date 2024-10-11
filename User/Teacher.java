@@ -5,6 +5,8 @@ import Course.CourseList;
 import Sys.Feedback;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 
 public class Teacher extends User {
@@ -50,7 +52,9 @@ public class Teacher extends User {
             return;
         }
 
-        Course c = new Course(courseName, courseTime, credit, period);
+        String id = generateCourseId(courseList.getCount());
+
+        Course c = new Course(this.getName(), id, courseName, courseTime, credit, period);
 
         // 检查课程名
         if (!c.isValidCourseName(courseName)) {
@@ -93,7 +97,31 @@ public class Teacher extends User {
 
         courses.add(c);
         courseList.addCourse(c);
+        courseList.addCount();
         System.out.println("Create course success (courseId: " + c.getCourseName() + ")");
+    }
+
+    public static String generateCourseId(int num) {
+        return "C-" + num;
+    }
+
+    @Override
+    public void listCourse() {
+        // 按老师姓名和课程编号排序
+        this.courses.sort(Comparator.comparing(Course::getTeacherName)
+                .thenComparing(Course::getCourseID));
+
+        // 打印输出
+        for (Course course : this.courses) {
+            System.out.println(course.getTeacherName() + " "
+                    + course.getCourseID() + " "
+                    + course.getCourseName() + " "
+                    + course.getTime() + " "
+                    + course.getCredit() + " "
+                    + course.getPeriod());
+        }
+
+        System.out.println(Feedback.LIST_COURSE_SUCCESS);
     }
 
 }

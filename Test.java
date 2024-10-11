@@ -66,7 +66,7 @@ public class Test {
                         system.createCourse(params);
                     }
                     case listCourse -> {
-                        if (params.length == 0) {
+                        if (params.length > 1) {
                             System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
                             break;
                         }

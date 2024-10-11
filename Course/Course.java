@@ -4,19 +4,38 @@ import Sys.Feedback;
 import User.UserData;
 
 public class Course {
+    private String courseID;
     private String courseName;
     private String time;
     private double credit;
     private int period;
 
-    private final CourseList courseList;
+    private String teacherName;
 
-    public Course(String courseName, String time, double credit, int period) {
+
+    public Course(String teacherName, String id, String courseName, String time, double credit, int period) {
+        setTeacherName(teacherName);
+        setCourseID(id);
         setCourseName(courseName);
         setTime(time);
         setCredit(credit);
         setPeriod(period);
-        this.courseList = CourseList.getInstance();
+    }
+
+    public String getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(String courseID) {
+        this.courseID = courseID;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public String getCourseName() {

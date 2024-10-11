@@ -198,10 +198,13 @@ public class Sys {
     }
 
     public void createCourse(String[] params) {
-        userData.findUser(currentUser.getId()).createCourse(params[0], params[1], Double.parseDouble(params[2]), Integer.parseInt(params[3]));
+        currentUser.createCourse(params[0], params[1], Double.parseDouble(params[2]), Integer.parseInt(params[3]));
     }
 
     public void listCourse(String[] params) {
+        if (params.length == 0) {
+            currentUser.listCourse();
+        }
     }
 
     public void selectCourse(String[] params) {

@@ -20,6 +20,7 @@ public class Feedback {
     public static final String COURSE_TIME_CONFLICTS = "Course time conflicts";
     public static final String ILLEGAL_COURSE_CREDIT = "Illegal course credit";
     public static final String ILLEGAL_COURSE_PERIOD = "Illegal course period";
+    public static final String LIST_COURSE_SUCCESS = "List course success";
 
 
 }

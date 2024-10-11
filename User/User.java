@@ -1,6 +1,6 @@
 package User;
 
-import Course.Course;
+import Course.*;
 import Sys.Feedback;
 
 public class User {
@@ -10,9 +10,13 @@ public class User {
     protected String identityType;
     protected boolean login = false;
 
-    UserData userData = UserData.getInstance();
+    private final UserData userData;
+    private final CourseList courseList;
 
     public User(String id, String name, String password, String checkPwd, String identityType) {
+        this.userData = UserData.getInstance();
+        this.courseList = CourseList.getInstance();
+
         if (!setId(id)) return;
         if (userData.hasUser(id)) {
             System.out.println(Feedback.USER_EXISTS);
@@ -110,5 +114,9 @@ public class User {
 
     public void createCourse(String courseName, String courseTime, double credit, int period) {
         System.out.println(Feedback.PERMISSION_DENIED);
+    }
+
+    public void listCourse() {
+        courseList.printCourseList();
     }
 }

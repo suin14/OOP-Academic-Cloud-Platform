@@ -1,7 +1,17 @@
 register 10000 amne A@123456 A@123456 Teacher
+register 20000 Leen A@123456 A@123456 Teacher
 register SY2221118 amne A@123456 A@123456 Student
 register AD001 amne A@123456 A@123456 Administrator
 
-login 10000     A@123456
-createCourse  C0011 6_9-15 2.5 12
+login 20000      A@123456
+createCourse Al_1 2_1-2 2 32
+createCourse QLBL 1_1-2 2 32
+logout
+
+login 10000      A@123456
+createCourse  C001 1_9-10 2.5 12
+createCourse  C002 2_9-10 2.5 12
+listCourse
+logout
+
 quit
