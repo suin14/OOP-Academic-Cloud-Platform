@@ -21,9 +21,6 @@ public class Sys {
 
     public void quit() {
         List<User> onlineUsers = new ArrayList<>(onlineUser.getOnlineUserList()); // 创建副本
-        if (onlineUsers.isEmpty()) {
-            return;
-        }
 
         for (User user : onlineUsers) {
             userData.logoutUser(user.getId());
@@ -33,6 +30,10 @@ public class Sys {
 
 
     public void register(String[] params) {
+        if (params[0].length() < 5) {
+            System.out.println(Feedback.ILLEGAL_USER_ID);
+            return;
+        }
         String id = params[0];
         String type = id.substring(0, 2); // 取前两个字符判断类型
 
@@ -212,6 +213,10 @@ public class Sys {
     }
 
     public void createCourse(String[] params) {
+        if (notLogin()) {
+            System.out.println(Feedback.NOT_ONLINE);
+            return;
+        }
         currentUser.createCourse(params[0], params[1], Double.parseDouble(params[2]), Integer.parseInt(params[3]));
     }
 
