@@ -13,6 +13,14 @@ public class Feedback {
     public static final String WRONG_PASSWORD = "Wrong password";
     public static final String NOT_ONLINE = "No one is online";
     public static final String PERMISSION_DENIED = "Permission denied";
+    public static final String COURSE_COUNT_REACHES_LIMIT = "Course count reaches limit";
+    public static final String ILLEGAL_COURSE_NAME = "Illegal course name";
+    public static final String COURSE_NAME_EXISTS = "Course name exists";
+    public static final String ILLEGAL_COURSE_TIME = "Illegal course time";
+    public static final String COURSE_TIME_CONFLICTS = "Course time conflicts";
+    public static final String ILLEGAL_COURSE_CREDIT = "Illegal course credit";
+    public static final String ILLEGAL_COURSE_PERIOD = "Illegal course period";
+
 
 }
 

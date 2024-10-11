@@ -10,6 +10,7 @@ public class Sys {
     public Sys() {
         this.userData = UserData.getInstance();
         this.currentUser = null;
+        this.onlineUser = OnlineUser.getInstance();
     }
 
     public void quit() {
@@ -45,10 +46,6 @@ public class Sys {
                 }
             }
         }
-
-
-
-
     }
 
     public void login(String[] params) {
@@ -73,8 +70,9 @@ public class Sys {
         }
 
         if (userData.loginUser(id)) {
-            currentUser = user;
-            onlineUser.addUser(user);
+            String type = user.getIdentityType();
+            this.currentUser = user;
+            this.onlineUser.addUser(user);
             System.out.println("Welcome to ACP, " + currentUser.getId());
         }
     }
@@ -144,7 +142,7 @@ public class Sys {
             currentUser = null;
         } else if (params.length == 1) {
             String id = params[0];
-            if (!isAdministrator()) {  //只能管理员操作
+            if (!checkPermission("Administrator")) {  //只能管理员操作
                 System.out.println(Feedback.PERMISSION_DENIED);
                 return;
             }
@@ -168,8 +166,8 @@ public class Sys {
         }
     }
 
-    public boolean isAdministrator() {
-        return currentUser.getIdentityType().equals("Administrator");
+    public boolean checkPermission(String Identity) {
+        return currentUser.getIdentityType().equals(Identity);
     }
 
     public void printInfo(String[] params) {
@@ -183,7 +181,7 @@ public class Sys {
         } else if (params.length == 1) {  //打印他人信息
             String id = params[0];
             User user = userData.findUser(id);
-            if (!isAdministrator()) {  //只能管理员操作
+            if (!checkPermission("Administrator")) {  //只能管理员操作
                 System.out.println(Feedback.PERMISSION_DENIED);
                 return;
             }
@@ -200,6 +198,7 @@ public class Sys {
     }
 
     public void createCourse(String[] params) {
+        userData.findUser(currentUser.getId()).createCourse(params[0], params[1], Double.parseDouble(params[2]), Integer.parseInt(params[3]));
     }
 
     public void listCourse(String[] params) {

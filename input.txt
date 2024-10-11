@@ -1,6 +1,7 @@
+register 10000 amne A@123456 A@123456 Teacher
+register SY2221118 amne A@123456 A@123456 Student
 register AD001 amne A@123456 A@123456 Administrator
-login AD001     A@123456
-logout AD001
-logout AD001
 
+login 10000     A@123456
+createCourse  C0011 6_9-15 2.5 12
 quit

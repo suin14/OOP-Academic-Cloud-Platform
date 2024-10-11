@@ -1,5 +1,6 @@
 package User;
 
+import Course.Course;
 import Sys.Feedback;
 
 public class User {
@@ -12,23 +13,20 @@ public class User {
     UserData userData = UserData.getInstance();
 
     public User(String id, String name, String password, String checkPwd, String identityType) {
-        if (setId(id)) {
-            if (!userData.hasUser(id)) {
-                if (setName(name)) {
-                    if (setPassword(password)) {
-                        if (password.equals(checkPwd)) {
-                            if (setIdentityType(identityType)) {
-                                userData.createUser(id, this);
-                            }
-                        } else {
-                            System.out.println(Feedback.PASSWORD_NOT_MATCH);  //密码与确认密码不一致
-                        }
-                    }
-                }
-            } else {
-                System.out.println(Feedback.USER_EXISTS); // 用户已存在
-            }
+        if (!setId(id)) return;
+        if (userData.hasUser(id)) {
+            System.out.println(Feedback.USER_EXISTS);
+            return;
         }
+        if (!setName(name)) return;
+        if (!setPassword(password)) return;
+        if (!password.equals(checkPwd)) {
+            System.out.println(Feedback.PASSWORD_NOT_MATCH); // 密码与确认密码不一致
+            return;
+        }
+        if (!setIdentityType(identityType)) return;
+
+        userData.createUser(id, this);
     }
 
     public String getId() {
@@ -108,5 +106,9 @@ public class User {
                 "Name: " + getName() + "\n" +
                 "Type: " + getIdentityType() + "\n" +
                 "Print information success";
+    }
+
+    public void createCourse(String courseName, String courseTime, double credit, int period) {
+        System.out.println(Feedback.PERMISSION_DENIED);
     }
 }
