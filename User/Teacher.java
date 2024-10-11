@@ -122,8 +122,7 @@ public class Teacher extends User {
 
         // 打印输出
         for (Course course : this.courses) {
-            System.out.println(course.getTeacherName() + " "
-                    + course.getCourseID() + " "
+            System.out.println(course.getCourseID() + " "
                     + course.getCourseName() + " "
                     + course.getTime() + " "
                     + course.getCredit() + " "

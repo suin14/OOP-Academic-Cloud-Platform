@@ -1,20 +1,28 @@
-registre
-logiin
-loggout
-ppprintInfo
-Printinfo
-register 22370000
-register 22370001
-register 22370001 _MJ
-register 22371001 Mu_Jue Aa123@ Aa123@ Student
-register 22371001 Mu_Jue Aa123@ Aa123@ Student
-register AD001 ad_min Bb123$ Bb123$ Administrator
-login 223700011
-login 22371001 Aa123@
-login 22371001 Aa123@
-printInfo
-logout 22371001
+register 22373001 Mu_Jue Aa123@ Aa123@ Student
+register 00001 T_ea Bb123$ Bb123$ Teacher
+login 22373001 Aa123@
+createCourse OO 4_3-4 3.0 48
 logout
-login AD001 Bb123$
-printInfo 22371001
+login 00001 Bb123$
+createCourse 8*&&@!
+createCourse _OO 4_3-4 3.0 48
+createCourse A*XXXX 1_2-3 4.5 72
+createCourse OO 4_3-4 3.0 48
+createCourse CO 5_3-4 4.5 72
+listCourse
+logout
+login 22373001 Aa123@
+listCourse
+selectCourse C-0
+selectCourse C-2222222
+selectCourse C-1
+selectCourse C-2
+logout
+login 00001 Bb123$
+cancelCourse C-0
+cancelCourse C-1
+listCourse
+logout
+login 22373001 Aa123@
+listCourse
 quit
