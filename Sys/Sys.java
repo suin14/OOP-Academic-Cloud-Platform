@@ -5,6 +5,7 @@ import User.*;
 public class Sys {
     private final UserData userData;  // 用户数据
     private User currentUser;
+    private OnlineUser onlineUser;  //在线用户列表
 
     public Sys() {
         this.userData = UserData.getInstance();
@@ -73,6 +74,7 @@ public class Sys {
 
         if (userData.loginUser(id)) {
             currentUser = user;
+            onlineUser.addUser(user);
             System.out.println("Welcome to ACP, " + currentUser.getId());
         }
     }
@@ -142,7 +144,7 @@ public class Sys {
             currentUser = null;
         } else if (params.length == 1) {
             String id = params[0];
-            if (!currentUser.getIdentityType().equals("Administrator")) {  //只能管理员操作
+            if (!isAdministrator()) {  //只能管理员操作
                 System.out.println(Feedback.PERMISSION_DENIED);
                 return;
             }
@@ -159,10 +161,15 @@ public class Sys {
                 return;
             }
             userData.logoutUser(id);
+            onlineUser.removeUser(userData.findUser(id));
             if(currentUser.getId().equals(id)) {
                 currentUser = null;
             }
         }
+    }
+
+    public boolean isAdministrator() {
+        return currentUser.getIdentityType().equals("Administrator");
     }
 
     public void printInfo(String[] params) {
@@ -176,7 +183,7 @@ public class Sys {
         } else if (params.length == 1) {  //打印他人信息
             String id = params[0];
             User user = userData.findUser(id);
-            if (!currentUser.getIdentityType().equals("Administrator")) {  //只能管理员操作
+            if (!isAdministrator()) {  //只能管理员操作
                 System.out.println(Feedback.PERMISSION_DENIED);
                 return;
             }

@@ -37,11 +37,11 @@ public class UserData {
     }
 
     public boolean loginUser(String id) {
-        if (userMap.get(id).isLogin()) {
+        if (findUser(id).isLogin()) {
             System.out.println(id + " is online");
             return false;
         }
-        userMap.get(id).setLogin();
+        findUser(id).setLogin();
         return true;
     }
 
