@@ -2,9 +2,7 @@ package User;
 
 import Course.Course;
 import Sys.Feedback;
-import Sys.Sys;
 
-import java.util.ArrayList;
 
 public class Student extends User{
 

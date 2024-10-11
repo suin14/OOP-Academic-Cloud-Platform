@@ -1,6 +1,5 @@
 package User;
 
-import Course.Course;
 import Sys.Feedback;
 
 public class Administrator extends User {

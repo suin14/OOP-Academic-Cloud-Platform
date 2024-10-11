@@ -10,7 +10,7 @@ import java.util.List;
 public class UserData {
     private static UserData instance;
     private final HashMap<String, User> users;
-    private OnlineUser onlineUser;
+    private final OnlineUser onlineUser;
 
     private UserData() {
         users = new HashMap<>();

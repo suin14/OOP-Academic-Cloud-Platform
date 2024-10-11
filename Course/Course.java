@@ -1,7 +1,5 @@
 package Course;
 
-import Sys.Feedback;
-import User.UserData;
 
 public class Course {
     private String courseID;
@@ -96,10 +94,8 @@ public class Course {
     }
 
     public boolean isFull() {
-        if (this.studentsCount == 30) {  // 每一门课的上限为30人
-            return true;
-        }
-        return false;
+        // 每一门课的上限为30人
+        return this.studentsCount == 30;
     }
 
     public boolean isValidCourseName(String courseName) {
@@ -114,11 +110,7 @@ public class Course {
         }
 
         // 检查是否符合指定格式：英文字母、数字、连接符-、下划线_
-        if (!courseName.matches("[A-Za-z][A-Za-z0-9-_]*")) {
-            return false;
-        }
-
-        return true;
+        return courseName.matches("[A-Za-z][A-Za-z0-9-_]*");
     }
 
     public boolean isValidCourseTime(String courseTime) {
@@ -130,11 +122,7 @@ public class Course {
         int end = Integer.parseInt(times[1]);
 
         // 检查格式是否为 X_Y-Y，X 和 Y 为 1-14 之间的整数，且 X <= Y
-        if (day < 1 || day > 7 || start < 1 || start > 14 || end < 1 || end > 14 || start > end) {
-            return false;
-        }
-
-        return true;
+        return day >= 1 && day <= 7 && start >= 1 && start <= 14 && end >= 1 && end <= 14 && start <= end;
     }
 
     // 检查上课时间冲突
@@ -161,16 +149,10 @@ public class Course {
     }
 
     public boolean isValidCourseCredit(double credit) {
-        if (credit <= 0 || credit > 12) {
-            return false;
-        }
-        return true;
+        return !(credit <= 0) && !(credit > 12);
     }
 
     public boolean isValidCoursePeriod(int period) {
-        if (period <= 0 || period > 1280) {
-            return false;
-        }
-        return true;
+        return period > 0 && period <= 1280;
     }
 }

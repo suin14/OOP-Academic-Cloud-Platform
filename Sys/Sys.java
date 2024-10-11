@@ -9,8 +9,8 @@ import java.util.List;
 public class Sys {
     private final UserData userData;  // 用户数据
     private User currentUser;
-    private OnlineUser onlineUser;  //在线用户列表
-    private CourseList courseList;
+    private final OnlineUser onlineUser;  //在线用户列表
+    private final CourseList courseList;
 
     public Sys() {
         this.currentUser = null;
@@ -85,7 +85,6 @@ public class Sys {
         }
 
         if (userData.loginUser(id)) {
-            String type = user.getIdentityType();
             this.currentUser = user;
             this.onlineUser.addUser(user);
             System.out.println("Welcome to ACP, " + currentUser.getId());
@@ -138,9 +137,7 @@ public class Sys {
         // 检查管理员 ID（5位数字，前缀AD）
         if (id.matches("^AD[0-9]{3}$")) {
             int adminNumber = Integer.parseInt(id.substring(2, 5)); // 管理员编号
-            if (adminNumber >= 1 && adminNumber <= 999) {
-                return true;
-            }
+            return adminNumber >= 1 && adminNumber <= 999;
         }
 
         return false;
@@ -152,7 +149,6 @@ public class Sys {
             return;
         }
         if (params.length == 0) {
-            String id = currentUser.getId();
             userData.logoutUser(currentUser.getId());
             currentUser = null;
         } else if (params.length == 1) {
@@ -270,11 +266,7 @@ public class Sys {
         int number = Integer.parseInt(numberPart);
 
         // 检查数字是否大于0
-        if (number <= 0) {
-            return false;
-        }
-
-        return true;
+        return number > 0;
     }
 
     public void cancelCourse(String[] params) {
