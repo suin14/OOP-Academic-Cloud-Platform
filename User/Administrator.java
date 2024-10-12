@@ -37,12 +37,6 @@ public class Administrator extends User {
 
     @Override
     public void listTeacherCourse(String id){
-        // 课程不存在
-        if (!courseList.hasCourse(id)) {
-            System.out.println(Feedback.COURSE_NOT_EXIST);
-            return;
-        }
-
         // 学工号不合法
         if (!(id.matches("\\d{5}") && Integer.parseInt(id) >= 1 && Integer.parseInt(id) <= 99999)) {
             System.out.println(Feedback.ILLEGAL_USER_ID);
