@@ -2,14 +2,11 @@ package User;
 
 import Course.Course;
 import Sys.Feedback;
-import Sys.Tools;
 
 import java.util.Comparator;
 
 
 public class Teacher extends User {
-
-
     public Teacher(String id, String name, String password, String checkPwd, String identityType) {
         super(id, name, password, checkPwd, identityType);
     }
@@ -53,7 +50,7 @@ public class Teacher extends User {
             return;
         }
 
-        String id = generateCourseId(courseList.getCount());
+        String id = generateCourseId(t.courseList.getCount());
 
 
 
@@ -99,8 +96,8 @@ public class Teacher extends User {
         Course c = new Course(getId(), getName(), id, courseName, courseTime, credit, period, 0);
 
         courses.add(c);
-        courseList.addCourse(c);
-        courseList.addCount();
+        t.courseList.addCourse(c);
+        t.courseList.addCount();
         System.out.println("Create course success (courseId: " + c.getCourseID() + ")");
     }
 
@@ -134,8 +131,8 @@ public class Teacher extends User {
     @Override
     public boolean removeCourse(Course course) {
         if (courses.remove(course)) {
-            courseList.removeCourse(course);
-            for (Student student : userData.getAllStudents()) {
+            t.courseList.removeCourse(course);
+            for (Student student : t.userData.getAllStudents()) {
                 student.removeCourse(course);
             }
             return true;

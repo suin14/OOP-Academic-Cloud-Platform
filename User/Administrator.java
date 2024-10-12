@@ -44,13 +44,13 @@ public class Administrator extends User {
         }
 
         // 用户未注册
-        if (!userData.hasUser(id)) {
+        if (!t.userData.hasUser(id)) {
             System.out.println(Feedback.USER_NOT_EXISTS);
             return;
         }
 
         //工号对应的用户权限不为 Teacher
-        User user = userData.findUser(id);
+        User user = t.userData.findUser(id);
 
         if (!user.getIdentityType().equals("Teacher")) {
             System.out.println(Feedback.NOT_TEACHER);

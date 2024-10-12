@@ -107,7 +107,4 @@ public class Course {
         // 每一门课的上限为30人
         return this.studentsCount == 30;
     }
-
-
-
 }

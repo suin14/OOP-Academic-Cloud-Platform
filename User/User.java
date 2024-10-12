@@ -13,17 +13,12 @@ public class User {
     protected String identityType;
     private boolean login = false;
 
-    protected UserData userData;
-    protected CourseList courseList;
-
     protected ArrayList<Course> courses;
     Tools t = new Tools();
 
     public User(String id, String name, String password, String checkPwd, String identityType) {
-        this.userData = UserData.getInstance();
-        this.courseList = CourseList.getInstance();
         this.courses = new ArrayList<>();
-        if (userData.hasUser(id)) {
+        if (t.userData.hasUser(id)) {
             System.out.println(Feedback.USER_EXISTS);
             return;
         }
@@ -36,7 +31,7 @@ public class User {
         }
         if (!setIdentityType(identityType)) return;
 
-        userData.createUser(id, this);
+        t.userData.createUser(id, this);
     }
 
 
@@ -124,11 +119,11 @@ public class User {
     }
 
     public void listCourse() {
-        if (courseList.isEmpty()) {
+        if (t.courseList.isEmpty()) {
             System.out.println(Feedback.COURSE_NOT_EXIST);
             return;
         }
-        courseList.printCourseList();
+        t.courseList.printCourseList();
     }
 
     public void listTeacherCourse(String id){

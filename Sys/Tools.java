@@ -1,6 +1,20 @@
 package Sys;
 
+import Course.CourseList;
+import User.UserData;
+
+
 public class Tools {
+    public final UserData userData;
+    public final OnlineUser onlineUser;
+    public final CourseList courseList;
+
+    public Tools() {
+        this.userData = UserData.getInstance();
+        this.onlineUser = OnlineUser.getInstance();
+        this.courseList = CourseList.getInstance();
+    }
+
     public boolean isValidCourseName(String courseName) {
         if (courseName.length() < 1 || courseName.length() > 20) {
             return false;
@@ -127,5 +141,19 @@ public class Tools {
         }
 
         return false;
+    }
+
+    public boolean isValidCourseId(String courseId) {
+        // 检查格式是否为 C-数字
+        if (!courseId.matches("C-\\d+")) {
+            return false;
+        }
+
+        // 获取数字部分并转换为整数
+        String numberPart = courseId.substring(2);
+        int number = Integer.parseInt(numberPart);
+
+        // 检查数字是否大于0
+        return number > 0;
     }
 }

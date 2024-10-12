@@ -7,29 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sys {
-    private final UserData userData;  // 用户数据
     private User currentUser;
-    private final OnlineUser onlineUser;  //在线用户列表
-    private final CourseList courseList;
-
     Tools t = new Tools();
 
     public Sys() {
         this.currentUser = null;
-        this.userData = UserData.getInstance();
-        this.onlineUser = OnlineUser.getInstance();
-        this.courseList = CourseList.getInstance();
     }
 
     public void quit() {
-        List<User> onlineUsers = new ArrayList<>(onlineUser.getOnlineUserList()); // 创建副本
+        List<User> onlineUsers = new ArrayList<>(t.onlineUser.getOnlineUserList()); // 创建副本
 
         for (User user : onlineUsers) {
-            userData.logoutUser(user.getId());
+            t.userData.logoutUser(user.getId());
         }
         System.out.println("----- Good Bye! -----");
     }
-
 
     public void register(String[] params) {
         if (params[0].length() < 5) {
@@ -74,26 +66,24 @@ public class Sys {
             return;
         }
 
-        if (!userData.hasUser(id)) {
+        if (!t.userData.hasUser(id)) {
             System.out.println(Feedback.USER_NOT_EXISTS);
             return;
         }
 
-        User user = userData.findUser(id);
+        User user = t.userData.findUser(id);
 
         if (!user.getPassword().equals(pwd)) {
             System.out.println(Feedback.WRONG_PASSWORD);
             return;
         }
 
-        if (userData.loginUser(id)) {
+        if (t.userData.loginUser(id)) {
             this.currentUser = user;
-            this.onlineUser.addUser(user);
+            t.onlineUser.addUser(user);
             System.out.println("Welcome to ACP, " + currentUser.getId());
         }
     }
-
-    
 
     public void logout(String[] params) {
         if (notLogin()) {
@@ -101,7 +91,7 @@ public class Sys {
             return;
         }
         if (params.length == 0) {
-            userData.logoutUser(currentUser.getId());
+            t.userData.logoutUser(currentUser.getId());
             currentUser = null;
         } else if (params.length == 1) {
             String id = params[0];
@@ -113,24 +103,20 @@ public class Sys {
                 System.out.println(Feedback.ILLEGAL_USER_ID);
                 return;
             }
-            if (!userData.hasUser(id)) {
+            if (!t.userData.hasUser(id)) {
                 System.out.println(Feedback.USER_NOT_EXISTS);
                 return;
             }
-            if (!userData.findUser(id).isLogin()) {
+            if (!t.userData.findUser(id).isLogin()) {
                 System.out.println(id + " is not online");  // 学工号对应的用户不在线
                 return;
             }
-            userData.logoutUser(id);
-            onlineUser.removeUser(userData.findUser(id));
+            t.userData.logoutUser(id);
+            t.onlineUser.removeUser(t.userData.findUser(id));
             if(currentUser.getId().equals(id)) {
                 currentUser = null;
             }
         }
-    }
-
-    public boolean checkPermission(String Identity) {
-        return currentUser.getIdentityType().equals(Identity);
     }
 
     public void printInfo(String[] params) {
@@ -139,11 +125,11 @@ public class Sys {
             return;
         }
         if (params.length == 0) {  // 打印当前用户的个人信息
-            User user = userData.findUser(currentUser.getId());
+            User user = t.userData.findUser(currentUser.getId());
             System.out.println(user.toString());
         } else if (params.length == 1) {  //打印他人信息
             String id = params[0];
-            User user = userData.findUser(id);
+            User user = t.userData.findUser(id);
             if (!checkPermission("Administrator")) {  //只能管理员操作
                 System.out.println(Feedback.PERMISSION_DENIED);
                 return;
@@ -152,7 +138,7 @@ public class Sys {
                 System.out.println(Feedback.ILLEGAL_USER_ID);
                 return;
             }
-            if (!userData.hasUser(id)) {
+            if (!t.userData.hasUser(id)) {
                 System.out.println(Feedback.USER_NOT_EXISTS);
                 return;
             }
@@ -181,23 +167,22 @@ public class Sys {
         }
     }
 
-
     public void selectCourse(String[] params) {
         if (notLogin()) {
             System.out.println(Feedback.NOT_ONLINE);
             return;
         }
         String CourseID = params[0];
-        if (!isValidCourseId(CourseID)) {
+        if (!t.isValidCourseId(CourseID)) {
             System.out.println(Feedback.ILLEGAL_COURSE_ID);
             return;
         }
 
-        if (!courseList.hasCourse(CourseID)) {
+        if (!t.courseList.hasCourse(CourseID)) {
             System.out.println(Feedback.COURSE_NOT_EXIST);
             return;
         }
-        Course c = courseList.findCourse(CourseID);
+        Course c = t.courseList.findCourse(CourseID);
 
         // 课程是否已经满 TODO
 //        if (c.isFull()) {
@@ -207,41 +192,27 @@ public class Sys {
         currentUser.selectCourse(c);
     }
 
-    public boolean isValidCourseId(String courseId) {
-        // 检查格式是否为 C-数字
-        if (!courseId.matches("C-\\d+")) {
-            return false;
-        }
-
-        // 获取数字部分并转换为整数
-        String numberPart = courseId.substring(2);
-        int number = Integer.parseInt(numberPart);
-
-        // 检查数字是否大于0
-        return number > 0;
-    }
-
     public void cancelCourse(String[] params) {
         if (notLogin()) {
             System.out.println(Feedback.NOT_ONLINE);
             return;
         }
         String CourseID = params[0];
-        if (!isValidCourseId(CourseID)) {
+        if (!t.isValidCourseId(CourseID)) {
             System.out.println(Feedback.ILLEGAL_COURSE_ID);
             return;
         }
-        Course c = courseList.findCourse(CourseID);
+        Course c = t.courseList.findCourse(CourseID);
         // 对于管理员
         if (checkPermission("Administrator")) {
-            User t = userData.findUser(c.getTeacherID());
-            if (!t.removeCourse(c)) {
+            User teacher = t.userData.findUser(c.getTeacherID());
+            if (!teacher.removeCourse(c)) {
                 return;
             }
-            for (Student student : userData.getAllStudents()) {
+            for (Student student : t.userData.getAllStudents()) {
                 student.removeCourse(c);
             }
-            if (!courseList.removeCourse(c)) {
+            if (!t.courseList.removeCourse(c)) {
                 System.out.println(Feedback.COURSE_NOT_EXIST);
                 return;
             }
@@ -253,6 +224,10 @@ public class Sys {
             }
             System.out.println("Cancel course success (courseId: " + c.getCourseID() + ")");
         }
+    }
+
+    public boolean checkPermission(String Identity) {
+        return currentUser.getIdentityType().equals(Identity);
     }
 
     public boolean notLogin() {
