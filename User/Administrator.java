@@ -1,6 +1,10 @@
 package User;
 
 import Sys.Feedback;
+import Course.*;
+
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Administrator extends User {
     public Administrator(String id, String name, String password, String checkPwd, String identityType) {
@@ -56,7 +60,26 @@ public class Administrator extends User {
             System.out.println(Feedback.NOT_TEACHER);
             return;
         }
+        
+        ArrayList<Course> courses =  user.getCourses();
 
-        user.listCourse();
+        if (courses.size() == 0) {
+            System.out.println(Feedback.COURSE_NOT_EXIST);
+            return;
+        }
+
+        // 老师姓名按字典序，课程编号按数字排序
+        courses.sort(Comparator.comparing(Course::getTeacherName)
+                .thenComparing(course -> Integer.parseInt(course.getCourseID().substring(2))));
+
+        for (Course course : courses) {
+            System.out.println(course.getTeacherName() + " "
+                    + course.getCourseID() + " "
+                    + course.getCourseName() + " "
+                    + course.getTime() + " "
+                    + course.getCredit() + " "
+                    + course.getPeriod());
+        }
+        System.out.println(Feedback.LIST_COURSE_SUCCESS);
     }
 }
