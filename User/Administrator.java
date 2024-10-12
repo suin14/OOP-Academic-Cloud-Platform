@@ -60,7 +60,7 @@ public class Administrator extends User {
             System.out.println(Feedback.NOT_TEACHER);
             return;
         }
-        
+
         ArrayList<Course> courses =  user.getCourses();
 
         if (courses.size() == 0) {

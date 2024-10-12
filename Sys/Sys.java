@@ -207,14 +207,11 @@ public class Sys {
         if (checkPermission("Administrator")) {
             User teacher = t.userData.findUser(c.getTeacherID());
             if (!teacher.removeCourse(c)) {
+                System.out.println(Feedback.COURSE_NOT_EXIST);
                 return;
             }
             for (Student student : t.userData.getAllStudents()) {
                 student.removeCourse(c);
-            }
-            if (!t.courseList.removeCourse(c)) {
-                System.out.println(Feedback.COURSE_NOT_EXIST);
-                return;
             }
             System.out.println("Cancel course success (courseId: " + c.getCourseID() + ")");
         } else {  // 对于老师或学生

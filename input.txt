@@ -1,28 +1,18 @@
-register 22373001 Mu_Jue Aa123@ Aa123@ Student
-register 00001 T_ea Bb123$ Bb123$ Teacher
-login 22373001 Aa123@
-createCourse OO 4_3-4 3.0 48
+register 12345 TeacherAD @pwd123 @pwd123 Teacher
+login 12345 @pwd123
+createCourse Java_Programming 1_8-10 3.0 40
+createCourse Data_Structures 2_1-3 2.5 45
+createCourse Operating_Systems 3_4-6 4.0 60
 logout
-login 00001 Bb123$
-createCourse 8*&&@!
-createCourse _OO 4_3-4 3.0 48
-createCourse A*XXXX 1_2-3 4.5 72
-createCourse OO 4_3-4 3.0 48
-createCourse CO 5_3-4 4.5 72
+
+register 22373001 StudentA @pwd456 @pwd456 Student
+login 22373001 @pwd456
 listCourse
-logout
-login 22373001 Aa123@
-listCourse
-selectCourse C-0
-selectCourse C-2222222
 selectCourse C-1
 selectCourse C-2
-logout
-login 00001 Bb123$
-cancelCourse C-0
+
+listCourse
 cancelCourse C-1
 listCourse
 logout
-login 22373001 Aa123@
-listCourse
 quit
