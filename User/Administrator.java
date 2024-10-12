@@ -38,7 +38,7 @@ public class Administrator extends User {
     @Override
     public void listTeacherCourse(String id){
         // 学工号不合法
-        if (!(id.matches("\\d{5}") && Integer.parseInt(id) >= 1 && Integer.parseInt(id) <= 99999)) {
+        if (!t.checkId(id)) {
             System.out.println(Feedback.ILLEGAL_USER_ID);
             return;
         }
@@ -56,6 +56,7 @@ public class Administrator extends User {
             System.out.println(Feedback.NOT_TEACHER);
             return;
         }
+
         user.listCourse();
     }
 }

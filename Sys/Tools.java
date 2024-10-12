@@ -76,4 +76,56 @@ public class Tools {
             return false;
         }
     }
+
+    public boolean checkId(String id) {
+        // 检查本科生 ID（8位数字）
+        if (id.matches("^[0-9]{8}$")) {
+            // 本科生 ID 解析
+            int year = Integer.parseInt(id.substring(0, 2)); // 年份
+            int college = Integer.parseInt(id.substring(2, 4)); // 学院代码
+            int classNumber = Integer.parseInt(id.substring(4, 5)); // 班级
+            int studentNumber = Integer.parseInt(id.substring(5, 8)); // 学号
+            if (year >= 19 && year <= 24 && college >= 1 && college <= 43 && classNumber >= 1 && classNumber <= 6 && studentNumber >= 1 && studentNumber <= 999) {
+                return true;
+            }
+        }
+
+        // 检查硕士生 ID（9位数字，前缀SY或ZY）
+        if (id.matches("^(SY|ZY)[0-9]{7}$")) {
+            int year = Integer.parseInt(id.substring(2, 4)); // 年份
+            int college = Integer.parseInt(id.substring(4, 6)); // 学院代码
+            int classNumber = Integer.parseInt(id.substring(6, 7)); // 班级
+            int studentNumber = Integer.parseInt(id.substring(7, 9)); // 学号
+            if (year >= 21 && year <= 24 && college >= 1 && college <= 43 && classNumber >= 1 && classNumber <= 6 && studentNumber >= 1 && studentNumber <= 99) {
+                return true;
+            }
+        }
+
+        // 检查博士生 ID（9位数字，前缀BY）
+        if (id.matches("^BY[0-9]{7}$")) {
+            int year = Integer.parseInt(id.substring(2, 4)); // 年份
+            int college = Integer.parseInt(id.substring(4, 6)); // 学院代码
+            int classNumber = Integer.parseInt(id.substring(6, 7)); // 班级
+            int studentNumber = Integer.parseInt(id.substring(7, 9)); // 学号
+            if (year >= 19 && year <= 24 && college >= 1 && college <= 43 && classNumber >= 1 && classNumber <= 6 && studentNumber >= 1 && studentNumber <= 99) {
+                return true;
+            }
+        }
+
+        // 检查教职工 ID（5位数字）
+        if (id.matches("^[0-9]{5}$")) {
+            int employeeNumber = Integer.parseInt(id);
+            if (employeeNumber >= 1 && employeeNumber <= 99999) {
+                return true;
+            }
+        }
+
+        // 检查管理员 ID（5位数字，前缀AD）
+        if (id.matches("^AD[0-9]{3}$")) {
+            int adminNumber = Integer.parseInt(id.substring(2, 5)); // 管理员编号
+            return adminNumber >= 1 && adminNumber <= 999;
+        }
+
+        return false;
+    }
 }

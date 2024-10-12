@@ -2,6 +2,7 @@ package User;
 
 import Course.*;
 import Sys.Feedback;
+import Sys.Tools;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class User {
     protected CourseList courseList;
 
     protected ArrayList<Course> courses;
+    Tools t = new Tools();
 
     public User(String id, String name, String password, String checkPwd, String identityType) {
         this.userData = UserData.getInstance();
