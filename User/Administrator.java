@@ -9,15 +9,20 @@ public class Administrator extends User {
 
     @Override
     public boolean setId(String id) {
-        if (id.length() == 5) {
-            if (Integer.parseInt(id.substring(2, 5)) >= 1 && Integer.parseInt(id.substring(2, 5)) <= 999) {
-                this.id = id;
-                return true;
+        if (id.length() == 5 && id.startsWith("AD")) {
+            String numericPart = id.substring(2);
+            if (numericPart.matches("\\d{3}")) {  // 检查后三位是否为数字
+                int number = Integer.parseInt(numericPart);
+                if (number >= 1 && number <= 999) {
+                    this.id = id;
+                    return true;
+                }
             }
         }
         System.out.println(Feedback.ILLEGAL_USER_ID);
         return false;
     }
+
 
     @Override
     public boolean setIdentityType(String identityType) {

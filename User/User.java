@@ -67,19 +67,19 @@ public class User {
     }
 
     public boolean setPassword(String password) {
-        // 检查长度是否在 6 到 16 之间
         if (password.length() < 6 || password.length() > 16) {
             System.out.println(Feedback.ILLEGAL_PASSWORD);
             return false;
         }
 
-        // 正则表达式检查
         boolean hasLetter = password.matches(".*[A-Za-z].*"); // 至少一个字母
         boolean hasDigit = password.matches(".*[0-9].*"); // 至少一个数字
         boolean hasSpecial = password.matches(".*[@_%$].*"); // 至少一个特殊字符
 
-        // 检查三类字符是否至少各有一个
-        if (hasLetter && hasDigit && hasSpecial) {
+        // 只允许字母、数字和特殊字符
+        boolean validCharacters = password.matches("[A-Za-z0-9@_%$]+");
+        
+        if (hasLetter && hasDigit && hasSpecial && validCharacters) {
             this.password = password;
             return true;
         } else {

@@ -73,7 +73,6 @@ public class Test {
 
             } catch (IllegalArgumentException e) {
                 System.out.println("Command '" + command + "' not found");
-
             }
         }
     }
