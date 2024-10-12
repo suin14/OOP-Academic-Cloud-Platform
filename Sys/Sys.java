@@ -213,7 +213,7 @@ public class Sys {
             System.out.println(Feedback.NOT_ONLINE);
             return;
         }
-        currentUser.createCourse(params[0], params[1], Double.parseDouble(params[2]), Integer.parseInt(params[3]));
+        currentUser.createCourse(params[0], params[1], params[2], params[3]);
     }
 
     public void listCourse(String[] params) {

@@ -1,12 +1,16 @@
 package Course;
 
 
+import Sys.Feedback;
+
+import java.text.DecimalFormat;
+
 public class Course {
     private String courseID;
     private String courseName;
     private String time;
-    private double credit;
-    private int period;
+    private String credit;
+    private String period;
     private String teacherID;
 
     private String teacherName;
@@ -14,7 +18,7 @@ public class Course {
     private int studentsCount; // 学生人数
 
 
-    public Course(String teacherID, String teacherName, String id, String courseName, String time, double credit, int period, int students) {
+    public Course(String teacherID, String teacherName, String id, String courseName, String time, String credit, String period, int students) {
         setTeacherID(teacherID);
         setTeacherName(teacherName);
         setCourseID(id);
@@ -65,19 +69,25 @@ public class Course {
         this.time = time;
     }
 
-    public double getCredit() {
+    public String getCredit() {
         return credit;
     }
 
-    public void setCredit(double credit) {
-        this.credit = credit;
+    public void setCredit(String creditStr) {
+        if (creditStr != null && creditStr.matches("-?\\d+(\\.\\d+)?")) {
+            double creditValue = Double.parseDouble(creditStr);
+            DecimalFormat df = new DecimalFormat("#.0");
+            this.credit = df.format(creditValue);
+        } else {
+            return;
+        }
     }
 
-    public int getPeriod() {
+    public String getPeriod() {
         return period;
     }
 
-    public void setPeriod(int period) {
+    public void setPeriod(String period) {
         this.period = period;
     }
 
@@ -99,7 +109,6 @@ public class Course {
     }
 
     public boolean isValidCourseName(String courseName) {
-        // 检查课程名称长度
         if (courseName.length() < 1 || courseName.length() > 20) {
             return false;
         }
@@ -109,20 +118,27 @@ public class Course {
             return false;
         }
 
-        // 检查是否符合指定格式：英文字母、数字、连接符-、下划线_
+        // 检查是否符合指定格式 英文字母、数字、连接符-、下划线_
         return courseName.matches("[A-Za-z][A-Za-z0-9-_]*");
     }
 
     public boolean isValidCourseTime(String courseTime) {
-        // 分离星期和上课时间段
-        String[] parts = courseTime.split("_");
-        int day = Integer.parseInt(parts[0]);
-        String[] times = parts[1].split("-");
-        int start = Integer.parseInt(times[0]);
-        int end = Integer.parseInt(times[1]);
+        if (!courseTime.matches("\\d+_\\d+-\\d+")) {
+            return false;
+        }
 
-        // 检查格式是否为 X_Y-Y，X 和 Y 为 1-14 之间的整数，且 X <= Y
-        return day >= 1 && day <= 7 && start >= 1 && start <= 14 && end >= 1 && end <= 14 && start <= end;
+        try {
+            // 分离星期和上课时间段
+            String[] parts = courseTime.split("_");
+            int day = Integer.parseInt(parts[0]); // X 1-7
+            String[] times = parts[1].split("-"); // Y-Y 1-14
+            int start = Integer.parseInt(times[0]);
+            int end = Integer.parseInt(times[1]);
+
+            return day >= 1 && day <= 7 && start >= 1 && start <= 14 && end >= 1 && end <= 14 && start <= end;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     // 检查上课时间冲突
@@ -148,11 +164,24 @@ public class Course {
         return false;
     }
 
-    public boolean isValidCourseCredit(double credit) {
-        return !(credit <= 0) && !(credit > 12);
+    public boolean isValidCourseCredit(String creditStr) {
+        // 是正整数或小数
+        if (!creditStr.matches("^(0*[1-9]\\d*(\\.\\d)?|1[0-1](\\.0)?)$")) {
+            return false;
+        }
+
+        double credit = Double.parseDouble(creditStr);
+
+        return credit > 0 && credit <= 12;
     }
 
-    public boolean isValidCoursePeriod(int period) {
-        return period > 0 && period <= 1280;
+    public boolean isValidCoursePeriod(String periodStr) {
+        try {
+            int period = Integer.parseInt(periodStr);
+            return period > 0 && period <= 1280;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
+
 }

@@ -78,7 +78,7 @@ public class User {
 
         // 只允许字母、数字和特殊字符
         boolean validCharacters = password.matches("[A-Za-z0-9@_%$]+");
-        
+
         if (hasLetter && hasDigit && hasSpecial && validCharacters) {
             this.password = password;
             return true;
@@ -117,7 +117,7 @@ public class User {
                 "Print information success";
     }
 
-    public void createCourse(String courseName, String courseTime, double credit, int period) {
+    public void createCourse(String courseName, String courseTime, String credit, String period) {
         System.out.println(Feedback.PERMISSION_DENIED);
     }
 

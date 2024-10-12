@@ -46,7 +46,7 @@ public class Teacher extends User {
     }
 
     @Override
-    public void createCourse(String courseName, String courseTime, double credit, int period){
+    public void createCourse(String courseName, String courseTime, String credit, String period){
         if (getCountCourses() >= 10) {
             System.out.println(Feedback.COURSE_COUNT_REACHES_LIMIT);  // 拥有课程已达最大数
             return;
