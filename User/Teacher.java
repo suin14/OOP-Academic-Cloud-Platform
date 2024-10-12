@@ -52,8 +52,6 @@ public class Teacher extends User {
 
         String id = generateCourseId(t.courseList.getCount());
 
-
-
         // 检查课程名
         if (!t.isValidCourseName(courseName)) {
             System.out.println(Feedback.ILLEGAL_COURSE_NAME);
@@ -113,9 +111,9 @@ public class Teacher extends User {
             return;
         }
 
-        // 按老师姓名和课程编号排序
+        // 老师姓名按字典序，课程编号按数字排序
         this.courses.sort(Comparator.comparing(Course::getTeacherName)
-                .thenComparing(Course::getCourseID));
+                .thenComparing(course -> Integer.parseInt(course.getCourseID().substring(2))));
 
         // 打印输出
         for (Course course : this.courses) {

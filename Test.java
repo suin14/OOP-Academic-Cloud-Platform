@@ -1,12 +1,10 @@
 import Sys.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Test {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
 //        File inputFile = new File("input.txt"); Scanner scan = new Scanner(inputFile);
         Scanner scan = new Scanner(System.in);
         String input;

@@ -41,11 +41,10 @@ public class CourseList {
     public void printCourseList() {
         List<Course> courses = new ArrayList<>(courseList.values());
 
-        // 按老师姓名和课程编号排序
+        // 老师姓名按字典序，课程编号按数字排序
         courses.sort(Comparator.comparing(Course::getTeacherName)
-                .thenComparing(Course::getCourseID));
+                .thenComparing(course -> Integer.parseInt(course.getCourseID().substring(2))));
 
-        // 打印输出
         for (Course course : courses) {
             System.out.println(course.getTeacherName() + " "
                     + course.getCourseID() + " "
