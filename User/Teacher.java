@@ -2,12 +2,13 @@ package User;
 
 import Course.Course;
 import Sys.Feedback;
+import Sys.Tools;
 
 import java.util.Comparator;
 
 
 public class Teacher extends User {
-
+    Tools t = new Tools();
 
     public Teacher(String id, String name, String password, String checkPwd, String identityType) {
         super(id, name, password, checkPwd, identityType);
@@ -54,10 +55,10 @@ public class Teacher extends User {
 
         String id = generateCourseId(courseList.getCount());
 
-        Course c = new Course(getId(), getName(), id, courseName, courseTime, credit, period, 0);
+
 
         // 检查课程名
-        if (!c.isValidCourseName(courseName)) {
+        if (!t.isValidCourseName(courseName)) {
             System.out.println(Feedback.ILLEGAL_COURSE_NAME);
             return;
         }
@@ -70,30 +71,32 @@ public class Teacher extends User {
         }
 
         // 课程时间不合法
-        if (!c.isValidCourseTime(courseTime)) {
+        if (!t.isValidCourseTime(courseTime)) {
             System.out.println(Feedback.ILLEGAL_COURSE_TIME);
             return;
         }
 
         // 课程时间冲突
         for (Course existingCourse : courses) {
-            if (c.isTimeConflict(existingCourse.getTime(), courseTime)) {
+            if (t.isTimeConflict(existingCourse.getTime(), courseTime)) {
                 System.out.println(Feedback.COURSE_TIME_CONFLICTS);
                 return;
             }
         }
 
         // 学分不合法
-        if (!c.isValidCourseCredit(credit)) {
+        if (!t.isValidCourseCredit(credit)) {
             System.out.println(Feedback.ILLEGAL_COURSE_CREDIT);
             return;
         }
 
         // 学时不合法
-        if (!c.isValidCoursePeriod(period)) {
+        if (!t.isValidCoursePeriod(period)) {
             System.out.println(Feedback.ILLEGAL_COURSE_PERIOD);
             return;
         }
+
+        Course c = new Course(getId(), getName(), id, courseName, courseTime, credit, period, 0);
 
         courses.add(c);
         courseList.addCourse(c);
