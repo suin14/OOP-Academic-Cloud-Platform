@@ -184,10 +184,10 @@ public class Sys {
         }
         Course c = t.courseList.findCourse(CourseID);
 
-        // 课程是否已经满 TODO
-//        if (c.isFull()) {
-//            return;
-//        }
+        if (c.isFull()) {
+            System.out.println(Feedback.COURSE_FULL);
+            return;
+        }
 
         currentUser.selectCourse(c);
     }
