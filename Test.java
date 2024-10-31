@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) throws FileNotFoundException {
-        File inputFile = new File("input.txt"); Scanner scan = new Scanner(inputFile);
-//        Scanner scan = new Scanner(System.in);
+//        File inputFile = new File("input.txt"); Scanner scan = new Scanner(inputFile);
+        Scanner scan = new Scanner(System.in);
         String input;
         Sys system = new Sys();
 

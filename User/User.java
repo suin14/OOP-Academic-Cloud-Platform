@@ -160,4 +160,8 @@ public class User {
         System.out.println(Feedback.PERMISSION_DENIED);
         return false;
     }
+
+    public void inputCourse(String courseName, String time, String credit, String period) {
+        System.out.println(Feedback.PERMISSION_DENIED);
+    }
 }

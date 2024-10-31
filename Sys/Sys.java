@@ -193,6 +193,7 @@ public class Sys {
         }
 
         currentUser.selectCourse(c);
+        c.increaseCnt();
     }
 
     public void cancelCourse(String[] params) {
@@ -291,7 +292,7 @@ public class Sys {
             List<Course> inputCourses = (List<Course>) ois.readObject();
 
             for (Course course : inputCourses) {
-                currentUser.createCourse(course.getCourseName(), course.getTime(),
+                currentUser.inputCourse(course.getCourseName(), course.getTime(),
                         course.getCredit(), course.getPeriod());
             }
             System.out.println(Feedback.INPUT_SUCCESS);
@@ -426,14 +427,17 @@ public class Sys {
                     return;
                 }
 
-                if(!student.removeCourse(t.courseList.findCourse(courseId))) {
+                Course c = t.courseList.findCourse(courseId);
+                if(!student.removeCourse(c)) {
                     System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
                     return;
                 }
+                c.decreaseCnt();
             } else {
                 for (Course course : currentUser.getCourses()) {
                     if (student.removeCourse(course)) {
                         flag = true;
+                        course.decreaseCnt();
                     }
                 }
                 if (!flag) {
@@ -452,11 +456,12 @@ public class Sys {
                     System.out.println(Feedback.COURSE_NOT_EXIST);
                     return;
                 }
-
-                if(!student.removeCourse(t.courseList.findCourse(courseId))) {
+                Course c = t.courseList.findCourse(courseId);
+                if(!student.removeCourse(c)) {
                     System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
                     return;
                 }
+                c.decreaseCnt();
             } else {
                 if (student.getCourses().size() == 0) {
                     System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
@@ -464,6 +469,7 @@ public class Sys {
                 }
                 for (Course course : student.getCourses()) {
                     student.removeCourse(course);
+                    course.decreaseCnt();
                 }
             }
             System.out.println(Feedback.REMOVE_STUDENT_SUCCESS);

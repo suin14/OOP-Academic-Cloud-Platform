@@ -101,6 +101,62 @@ public class Teacher extends User {
         System.out.println("Create course success (courseId: " + c.getCourseID() + ")");
     }
 
+    @Override
+    public void inputCourse(String courseName, String courseTime, String credit, String period){
+        if (getCountCourses() >= 10) {
+            System.out.println(Feedback.COURSE_COUNT_REACHES_LIMIT);  // 拥有课程已达最大数
+            return;
+        }
+
+        String id = generateCourseId(t.courseList.getCount());
+
+        // 检查课程名
+        if (!t.isValidCourseName(courseName)) {
+            System.out.println(Feedback.ILLEGAL_COURSE_NAME);
+            return;
+        }
+
+        for (Course existingCourse : courses) {
+            if (existingCourse.getCourseName().equals(courseName)) {
+                System.out.println("Course name already exists");
+                return;
+            }
+        }
+
+        // 课程时间不合法
+        if (!t.isValidCourseTime(courseTime)) {
+            System.out.println(Feedback.ILLEGAL_COURSE_TIME);
+            return;
+        }
+
+        // 课程时间冲突
+        for (Course existingCourse : courses) {
+            if (t.isTimeConflict(existingCourse.getTime(), courseTime)) {
+                System.out.println(Feedback.COURSE_TIME_CONFLICTS);
+                return;
+            }
+        }
+
+        // 学分不合法
+        if (!t.isValidCourseCredit(credit)) {
+            System.out.println(Feedback.ILLEGAL_COURSE_CREDIT);
+            return;
+        }
+
+        // 学时不合法
+        if (!t.isValidCoursePeriod(period)) {
+            System.out.println(Feedback.ILLEGAL_COURSE_PERIOD);
+            return;
+        }
+
+        Course c = new Course(getId(), getName(), id, courseName, courseTime, credit, period, 0);
+
+        courses.add(c);
+        t.courseList.addCourse(c);
+        t.courseList.addCount();
+        System.out.println("Create course success (courseId: " + c.getCourseID() + ")");
+    }
+
     public static String generateCourseId(int num) {
         num += 1;
         return "C-" + num;

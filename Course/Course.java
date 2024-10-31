@@ -105,6 +105,13 @@ public class Course implements Serializable {
     }
 
     public boolean isFull() {
-        return this.studentsCount == 30;
+        return this.studentsCount >= 30;
+    }
+
+    public void decreaseCnt() {
+        this.studentsCount--;
+    }
+    public void increaseCnt() {
+        this.studentsCount++;
     }
 }
