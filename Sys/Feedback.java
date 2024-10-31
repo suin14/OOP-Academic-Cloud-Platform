@@ -35,5 +35,6 @@ public class Feedback {
     public static final String REMOVE_STUDENT_SUCCESS = "Remove student success";
     public static final String NOT_STUDENT = "User id does not belong to a Student";
     public static final String STUDENT_NOT_IN_COURSE = "Student does not select course";
+    public static final String LIST_SCHEDULE_SUCCESS = "List course schedule success";
 }
 

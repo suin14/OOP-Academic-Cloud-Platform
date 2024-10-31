@@ -475,6 +475,47 @@ public class Sys {
     }
 
     public void listCourseSchedule(String[] params) {
+        if (notLogin()) {
+            System.out.println(Feedback.NOT_ONLINE);
+            return;
+        }
+
+        if (params.length != 1) {
+            String id = params[0];
+            if (!checkPermission("Administrator")) {
+                System.out.println(Feedback.PERMISSION_DENIED);
+                return;
+            }
+
+            if (t.checkId(id)) {
+                System.out.println(Feedback.ILLEGAL_USER_ID);
+                return;
+            }
+
+            if (!t.userData.hasUser(id)) {
+                System.out.println(Feedback.USER_NOT_EXISTS);
+                return;
+            }
+
+            if (!t.userData.findUser(id).getIdentityType().equals("Student")) {
+                System.out.println(Feedback.NOT_STUDENT);
+                return;
+            }
+
+            Student student = t.userData.findStudent(id);
+            student.printSchedule();
+        } else {
+            if (!checkPermission("Student")) {
+                System.out.println(Feedback.PERMISSION_DENIED);
+                return;
+            }
+            Student student = t.userData.findStudent(currentUser.getId());
+            if (student.getCourses().size() == 0) {
+                System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
+                return;
+            }
+            student.printSchedule();
+        }
     }
 }
 
