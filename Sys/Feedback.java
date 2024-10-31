@@ -32,5 +32,8 @@ public class Feedback {
     public static final String FILE_IS_DIRECTORY= "File is a directory";
     public static final String LIST_STUDENT_SUCCESS = "List student success";
     public static final String COURSE_NOT_STUDENT = "Student does not select course";
+    public static final String REMOVE_STUDENT_SUCCESS = "Remove student success";
+    public static final String NOT_STUDENT = "User id does not belong to a Student";
+    public static final String STUDENT_NOT_IN_COURSE = "Student does not select course";
 }
 

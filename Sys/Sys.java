@@ -385,5 +385,96 @@ public class Sys {
             return 4;
         }
     }
+
+    public void removeStudent(String[] params) {
+        if (notLogin()) {
+            System.out.println(Feedback.NOT_ONLINE);
+            return;
+        }
+
+        boolean designated = false;
+        boolean flag = false;
+        String courseId = "";
+        String studentId = params[0];
+        if (params.length == 2) {
+            courseId = params[1];
+            designated = true;
+        }
+
+        if (!t.checkId(studentId)) {
+            System.out.println(Feedback.ILLEGAL_USER_ID);
+            return;
+        }
+        if (!t.userData.hasUser(studentId)) {
+            System.out.println(Feedback.USER_NOT_EXISTS);
+            return;
+        }
+        if (!t.userData.findUser(studentId).getIdentityType().equals("Student")) {
+            System.out.println(Feedback.NOT_STUDENT);
+            return;
+        }
+
+        Student student = t.userData.findStudent(studentId);
+        if (checkPermission("Teacher")) {
+            if (designated) {
+                if (!t.isValidCourseId(courseId)) {
+                    System.out.println(Feedback.ILLEGAL_COURSE_ID);
+                    return;
+                }
+                if (!currentUser.hasCourse(courseId)) {
+                    System.out.println(Feedback.COURSE_NOT_EXIST);
+                    return;
+                }
+
+                if(!student.removeCourse(t.courseList.findCourse(courseId))) {
+                    System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
+                    return;
+                }
+            } else {
+                for (Course course : currentUser.getCourses()) {
+                    if (student.removeCourse(course)) {
+                        flag = true;
+                    }
+                }
+                if (!flag) {
+                    System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
+                    return;
+                }
+            }
+            System.out.println(Feedback.REMOVE_STUDENT_SUCCESS);
+        } else if (checkPermission("Administrator")) {
+            if (designated) {
+                if (!t.isValidCourseId(courseId)) {
+                    System.out.println(Feedback.ILLEGAL_COURSE_ID);
+                    return;
+                }
+                if (!t.courseList.hasCourse(courseId)) {
+                    System.out.println(Feedback.COURSE_NOT_EXIST);
+                    return;
+                }
+
+                if(!student.removeCourse(t.courseList.findCourse(courseId))) {
+                    System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
+                    return;
+                }
+            } else {
+                if (student.getCourses().size() == 0) {
+                    System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
+                    return;
+                }
+                for (Course course : student.getCourses()) {
+                    student.removeCourse(course);
+                }
+            }
+            System.out.println(Feedback.REMOVE_STUDENT_SUCCESS);
+        } else {
+            System.out.println(Feedback.PERMISSION_DENIED);
+            return;
+        }
+        System.out.println(Feedback.REMOVE_STUDENT_SUCCESS);
+    }
+
+    public void listCourseSchedule(String[] params) {
+    }
 }
 

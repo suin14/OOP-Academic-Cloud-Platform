@@ -94,10 +94,12 @@ public class Test {
                         system.listStudent(params);
                     }
                     case removeStudent -> {
-                        //移除选课学生
+                        if (!validateParamCount(params, 1) || !validateParamCount(params, 2)) break;
+                        system.removeStudent(params);
                     }
                     case listCourseSchedule -> {
-                        //查看课表
+                        if (!validateParamCount(params, 0) || !validateParamCount(params, 1)) break;
+                        system.listCourseSchedule(params);
                     }
                     default -> System.out.println("Command '" + command + "' not found");
                 }

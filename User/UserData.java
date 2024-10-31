@@ -66,4 +66,13 @@ public class UserData {
         }
         return students;
     }
+
+    public Student findStudent(String studentId) {
+        for (Student student : getAllStudents()) {
+            if (student.getId().equals(studentId)) {
+                return student;
+            }
+        }
+        return null;
+    }
 }
