@@ -3,6 +3,10 @@ package Sys;
 import Course.*;
 import User.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -252,6 +256,29 @@ public class Sys {
 
         currentUser = user;
         System.out.println("Switch to " + user.getId());
+    }
+
+
+    public void inputCourseBatch(String[] params) {
+    }
+
+    public void outputCourseBatch(String[] params) {
+        if (notLogin()) {
+            System.out.println(Feedback.NOT_ONLINE);
+            return;
+        }
+
+        String filePath = "./data/" + params[0];
+
+        new File(filePath).getParentFile().mkdirs();
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            List<String> courseInfo = currentUser.outputCourseInfo();
+            oos.writeObject(courseInfo);
+            System.out.println(Feedback.OUTPUT_SUCCESS);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

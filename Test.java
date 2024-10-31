@@ -82,10 +82,12 @@ public class Test {
                         system.switchUser(params);
                     }
                     case inputCourseBatch -> {
-                        //批量导入课程
+                        if (!validateParamCount(params, 1)) break;
+                        system.inputCourseBatch(params);
                     }
                     case outputCourseBatch -> {
-                        //批量导出课程
+                        if (!validateParamCount(params, 1)) break;
+                        system.outputCourseBatch(params);
                     }
                     case listStudent -> {
                         //查看选课学生

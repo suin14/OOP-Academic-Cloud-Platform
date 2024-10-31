@@ -5,6 +5,7 @@ import Sys.Feedback;
 import Sys.Tools;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
     protected String id;
@@ -145,5 +146,10 @@ public class User {
 
     public void setCourses(ArrayList<Course> courses) {
         this.courses = courses;
+    }
+
+    public List<String> outputCourseInfo() {
+        System.out.println(Feedback.PERMISSION_DENIED);
+        return null;
     }
 }

@@ -3,7 +3,9 @@ package User;
 import Course.Course;
 import Sys.Feedback;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 
 public class Teacher extends User {
@@ -137,6 +139,21 @@ public class Teacher extends User {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public List<String> outputCourseInfo() {
+        ArrayList<String> courseInfoList = new ArrayList<>();
+
+        for (Course course : this.courses) {
+            String courseInfo = course.getCourseName() + " "
+                    + course.getTime() + " "
+                    + course.getCredit() + " "
+                    + course.getPeriod();
+            courseInfoList.add(courseInfo);
+        }
+
+        return courseInfoList;
     }
 
 }
