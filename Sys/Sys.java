@@ -230,5 +230,28 @@ public class Sys {
     public boolean notLogin() {
         return this.currentUser == null;
     }
+
+    public void switchUser(String[] params) {
+        String id = params[0];
+
+        if (!t.checkId(id)) {
+            System.out.println(Feedback.ILLEGAL_USER_ID);
+            return;
+        }
+
+        if (!t.userData.hasUser(id)) {
+            System.out.println(Feedback.USER_NOT_EXISTS);
+            return;
+        }
+
+        User user = t.userData.findUser(id);
+        if (!t.onlineUser.checkLogin(user)) {
+            System.out.println(user.getId() +" is not online");
+            return;
+        }
+
+        currentUser = user;
+        System.out.println("Switch to " + user.getId());
+    }
 }
 

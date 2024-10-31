@@ -31,4 +31,8 @@ public class OnlineUser {
     public void removeUser(User user) {
         onlineUserList.remove(user);
     }
+
+    public boolean checkLogin(User user) {
+        return onlineUserList.contains(user);
+    }
 }

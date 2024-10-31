@@ -1,18 +1,6 @@
-register 12345 TeacherAD @pwd123 @pwd123 Teacher
-login 12345 @pwd123
-createCourse Java_Programming 1_8-10 3.0 40
-createCourse Data_Structures 2_1-3 2.5 45
-createCourse Operating_Systems 3_4-6 4.0 60
-logout
-
-register 22373001 StudentA @pwd456 @pwd456 Student
-login 22373001 @pwd456
-listCourse
-selectCourse C-1
-selectCourse C-2
-
-listCourse
-cancelCourse C-1
-listCourse
-logout
-quit
+register 00001 Tea_a 222Bb$ 222Bb$ Teacher
+register 00002 Tea_b 333Bb$ 333Bb$ Teacher
+login 00001 222Bb$
+switch 00002
+login 00002 333Bb$
+switch 00002

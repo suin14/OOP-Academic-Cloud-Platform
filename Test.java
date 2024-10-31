@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) throws FileNotFoundException {
-//        File inputFile = new File("input.txt"); Scanner scan = new Scanner(inputFile);
-        Scanner scan = new Scanner(System.in);
+        File inputFile = new File("input.txt"); Scanner scan = new Scanner(inputFile);
+//        Scanner scan = new Scanner(System.in);
         String input;
         Sys system = new Sys();
 
@@ -21,8 +21,17 @@ public class Test {
             String command = tokens[0];
             String[] params = getParameters(tokens);
             try {
-                switch (Command.valueOf(command)) {
-                    case quit -> { // 退出系统
+                Command cmd;
+                if (command.equals("switchUser")) {
+                    cmd = Command.valueOf("none");
+                } else if (command.equals("switch")) {
+                    cmd = Command.switchUser; // 将 "switch" 映射到 switchUser
+                } else {
+                    cmd = Command.valueOf(command);
+                }
+
+                switch (cmd) {
+                    case quit -> {
                         if (!validateParamCount(params, 0)) break;
                         system.quit();
                         return;
@@ -67,6 +76,25 @@ public class Test {
                     case cancelCourse -> {
                         if (!validateParamCount(params, 1)) break;
                         system.cancelCourse(params);
+                    }
+                    case switchUser -> {
+                        if (!validateParamCount(params, 1)) break;
+                        system.switchUser(params);
+                    }
+                    case inputCourseBatch -> {
+                        //批量导入课程
+                    }
+                    case outputCourseBatch -> {
+                        //批量导出课程
+                    }
+                    case listStudent -> {
+                        //查看选课学生
+                    }
+                    case removeStudent -> {
+                        //移除选课学生
+                    }
+                    case listCourseSchedule -> {
+                        //查看课表
                     }
                     default -> System.out.println("Command '" + command + "' not found");
                 }

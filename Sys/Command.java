@@ -11,4 +11,11 @@ public enum Command {
     listCourse,
     selectCourse,
     cancelCourse,
+    switchUser,
+    inputCourseBatch,
+    outputCourseBatch,
+    listStudent,
+    removeStudent,
+    listCourseSchedule,
+    Other
 }
