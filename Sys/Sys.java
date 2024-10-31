@@ -3,10 +3,7 @@ package Sys;
 import Course.*;
 import User.*;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -260,6 +257,46 @@ public class Sys {
 
 
     public void inputCourseBatch(String[] params) {
+        if (notLogin()) {
+            System.out.println(Feedback.NOT_ONLINE);
+            return;
+        }
+
+        if (!checkPermission("Teacher")) {
+            System.out.println(Feedback.PERMISSION_DENIED);
+            return;
+        }
+
+        String filePath = "./data/" + params[0];
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            System.out.println(Feedback.FILE_NOT_EXIST);
+            return;
+        }
+
+        if (file.isDirectory()) {
+            System.out.println(Feedback.FILE_IS_DIRECTORY);
+            return;
+        }
+
+        if (currentUser.getCourses().size() >= 10) {
+            System.out.println(Feedback.COURSE_COUNT_LIMIT);
+            return;
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+            List<Course> inputCourses = (List<Course>) ois.readObject();
+
+            for (Course course : inputCourses) {
+                currentUser.createCourse(course.getCourseName(), course.getTime(),
+                        course.getCredit(), course.getPeriod());
+            }
+            System.out.println(Feedback.INPUT_SUCCESS);
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void outputCourseBatch(String[] params) {
@@ -273,8 +310,7 @@ public class Sys {
         new File(filePath).getParentFile().mkdirs();
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            List<String> courseInfo = currentUser.outputCourseInfo();
-            oos.writeObject(courseInfo);
+            oos.writeObject(new ArrayList<>(currentUser.outputCourseInfo()));
             System.out.println(Feedback.OUTPUT_SUCCESS);
         } catch (IOException e) {
             e.printStackTrace();

@@ -2,10 +2,11 @@ package Course;
 
 
 import Sys.Feedback;
-
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class Course {
+public class Course implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String courseID;
     private String courseName;
     private String time;

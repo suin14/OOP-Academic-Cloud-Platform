@@ -1,11 +1,13 @@
 register 00001 Tea_a 222Bb$ 222Bb$ Teacher
+register 00002 Tea_b 333Bb$ 333Bb$ Teacher
 register AD001 Admin 888ADad% 888ADad% Administrator
 login 00001 222Bb$
 createCourse OO 1_3-4 2.5 45
 createCourse CO 4_7-8 4.5 81
 createCourse AL 3_1-2 3.0 54
 outputCourseBatch help.txt
-
-
+login 00002 333Bb$
+inputCourseBatch help.txt
+listCourse
 
 quit

@@ -26,6 +26,9 @@ public class Feedback {
     public static final String NOT_TEACHER = "User id does not belong to a Teacher";
     public static final String COURSE_FULL = "Course capacity is full";
     public static final String OUTPUT_SUCCESS = "Output course batch success";
-
+    public static final String INPUT_SUCCESS = "Input course batch success";
+    public static final String COURSE_COUNT_LIMIT = "Course count reaches limit";
+    public static final String FILE_NOT_EXIST= "File does not exist";
+    public static final String FILE_IS_DIRECTORY= "File is a directory";
 }
 

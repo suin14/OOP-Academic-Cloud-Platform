@@ -142,18 +142,9 @@ public class Teacher extends User {
     }
 
     @Override
-    public List<String> outputCourseInfo() {
-        ArrayList<String> courseInfoList = new ArrayList<>();
-
-        for (Course course : this.courses) {
-            String courseInfo = course.getCourseName() + " "
-                    + course.getTime() + " "
-                    + course.getCredit() + " "
-                    + course.getPeriod();
-            courseInfoList.add(courseInfo);
-        }
-
-        return courseInfoList;
+    public ArrayList<Course> outputCourseInfo() {
+        return new ArrayList<>(this.courses);
     }
+
 
 }
