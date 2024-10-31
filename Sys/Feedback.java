@@ -30,5 +30,7 @@ public class Feedback {
     public static final String COURSE_COUNT_LIMIT = "Course count reaches limit";
     public static final String FILE_NOT_EXIST= "File does not exist";
     public static final String FILE_IS_DIRECTORY= "File is a directory";
+    public static final String LIST_STUDENT_SUCCESS = "List student success";
+    public static final String COURSE_NOT_STUDENT = "Student does not select course";
 }
 

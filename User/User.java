@@ -154,4 +154,9 @@ public class User {
         System.out.println(Feedback.PERMISSION_DENIED);
         return null;
     }
+
+    public boolean hasCourse(String courseId) {
+        System.out.println(Feedback.PERMISSION_DENIED);
+        return false;
+    }
 }

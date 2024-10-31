@@ -90,7 +90,8 @@ public class Test {
                         system.outputCourseBatch(params);
                     }
                     case listStudent -> {
-                        //查看选课学生
+                        if (!validateParamCount(params, 1)) break;
+                        system.listStudent(params);
                     }
                     case removeStudent -> {
                         //移除选课学生

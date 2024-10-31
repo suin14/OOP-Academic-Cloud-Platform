@@ -82,4 +82,9 @@ public class Administrator extends User {
         }
         System.out.println(Feedback.LIST_COURSE_SUCCESS);
     }
+
+    @Override
+    public boolean hasCourse(String courseId) {
+        return t.courseList.hasCourse(courseId);
+    }
 }

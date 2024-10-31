@@ -146,5 +146,9 @@ public class Teacher extends User {
         return new ArrayList<>(this.courses);
     }
 
-
+    @Override
+    public boolean hasCourse(String courseId) {
+        Course course = t.courseList.findCourse(courseId);
+        return courses.contains(course);
+    }
 }

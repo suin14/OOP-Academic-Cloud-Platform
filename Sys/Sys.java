@@ -5,7 +5,9 @@ import User.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Sys {
     private User currentUser;
@@ -314,6 +316,73 @@ public class Sys {
             System.out.println(Feedback.OUTPUT_SUCCESS);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void listStudent(String[] params) {
+        if (notLogin()) {
+            System.out.println(Feedback.NOT_ONLINE);
+            return;
+        }
+        if (checkPermission("Student")) {
+            System.out.println(Feedback.PERMISSION_DENIED);
+            return;
+        }
+
+        String courseId = params[0];
+
+        if (!t.isValidCourseId(courseId)) {
+            System.out.println(Feedback.ILLEGAL_COURSE_ID);
+            return;
+        }
+
+        if (!currentUser.hasCourse(courseId)) {
+            System.out.println(Feedback.COURSE_NOT_EXIST);
+            return;
+        }
+
+        List<Student> enrolledStudents = new ArrayList<>();
+
+        for (Student student : t.userData.getAllStudents()) {
+            if (student.hasCourse(courseId)) {
+                enrolledStudents.add(student);
+            }
+        }
+
+        enrolledStudents.sort((s1, s2) -> {
+            String id1 = s1.getId();
+            String id2 = s2.getId();
+
+            int degree1 = getDegreeRank(id1);
+            int degree2 = getDegreeRank(id2);
+
+            // 按学位排序，如果学位相同则按学号升序
+            if (degree1 != degree2) {
+                return Integer.compare(degree1, degree2);
+            } else {
+                return id1.compareTo(id2);
+            }
+        });
+
+        if (enrolledStudents.isEmpty()) {
+            System.out.println(Feedback.COURSE_NOT_STUDENT);
+        } else {
+            for (Student student : enrolledStudents) {
+                System.out.println(student.getId() + ": " + student.getName());
+            }
+            System.out.println(Feedback.LIST_STUDENT_SUCCESS);
+        }
+    }
+
+    private int getDegreeRank(String studentId) {
+        if (studentId.startsWith("BY")) { // 博士
+            return 1;
+        } else if (studentId.startsWith("SY")) { // 学术硕士
+            return 2;
+        } else if (studentId.startsWith("ZY")) { // 专业硕士
+            return 3;
+        } else { // 本科生
+            return 4;
         }
     }
 }

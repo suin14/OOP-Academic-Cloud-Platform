@@ -65,4 +65,10 @@ public class Student extends User{
     public boolean removeCourse(Course course) {
         return courses.remove(course);
     }
+
+    @Override
+    public boolean hasCourse(String courseId) {
+        Course course = t.courseList.findCourse(courseId);
+        return courses.contains(course);
+    }
 }
