@@ -94,11 +94,17 @@ public class Test {
                         system.listStudent(params);
                     }
                     case removeStudent -> {
-                        if (!validateParamCount(params, 1) || !validateParamCount(params, 2)) break;
+                        if (params.length < 1 || params.length > 2) {
+                            System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
+                            break;
+                        }
                         system.removeStudent(params);
                     }
                     case listCourseSchedule -> {
-                        if (!validateParamCount(params, 0) || !validateParamCount(params, 1)) break;
+                        if (params.length > 1) {
+                            System.out.println(Feedback.ILLEGAL_ARGUMENT_COUNT);
+                            break;
+                        }
                         system.listCourseSchedule(params);
                     }
                     default -> System.out.println("Command '" + command + "' not found");

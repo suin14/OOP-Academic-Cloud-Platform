@@ -469,9 +469,7 @@ public class Sys {
             System.out.println(Feedback.REMOVE_STUDENT_SUCCESS);
         } else {
             System.out.println(Feedback.PERMISSION_DENIED);
-            return;
         }
-        System.out.println(Feedback.REMOVE_STUDENT_SUCCESS);
     }
 
     public void listCourseSchedule(String[] params) {
@@ -480,7 +478,7 @@ public class Sys {
             return;
         }
 
-        if (params.length != 1) {
+        if (params.length == 1) {
             String id = params[0];
             if (!checkPermission("Administrator")) {
                 System.out.println(Feedback.PERMISSION_DENIED);

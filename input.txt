@@ -1,13 +1,41 @@
-register 00001 Tea_a 222Bb$ 222Bb$ Teacher
-register 00002 Tea_b 333Bb$ 333Bb$ Teacher
-register AD001 Admin 888ADad% 888ADad% Administrator
-login 00001 222Bb$
+register 22373003 Hchc Aa333@ Aa333@ Student
+register 22373002 Hbhb Aa222@ Aa222@ Student
+register 22373001 Haha Aa111@ Aa111@ Student
+register 00001 Tea_a Bb111$ Bb111$ Teacher
+register 00002 Tea_b Bb222$ Bb222$ Teacher
+login 22373003 Aa333@
+login 22373002 Aa222@
+login 22373001 Aa111@
+login 00001 Bb111$
+login 00002 Bb222$
+switch 00001
+createCourse OO 1_1-2 2.5 45
+createCourse CO 3_3-4 4.5 81
+switch 00002
 createCourse OO 1_3-4 2.5 45
-createCourse CO 4_7-8 4.5 81
-createCourse AL 3_1-2 3.0 54
-outputCourseBatch help.txt
-login 00002 333Bb$
-inputCourseBatch help.txt
-listCourse
-
+createCourse CO 3_5-6 4.5 81
+switch 22373003
+selectCourse C-1
+selectCourse C-2
+selectCourse C-3
+selectCourse C-4
+switch 22373002
+selectCourse C-2
+selectCourse C-4
+switch 22373001
+selectCourse C-1
+selectCourse C-3
+switch 00001
+listStudent C-1
+switch 00002
+listStudent C-4
+switch 00001
+removeStudent 22373001 C-1
+removeStudent 22373001 C-1
+switch 22373001
+listCourseSchedule
+switch 22373002
+listCourseSchedule
+switch 22373003
+listCourseSchedule
 quit
