@@ -6,6 +6,7 @@ import User.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -467,8 +468,10 @@ public class Sys {
                     System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
                     return;
                 }
-                for (Course course : student.getCourses()) {
-                    student.removeCourse(course);
+                Iterator<Course> iterator = student.getCourses().iterator();
+                while (iterator.hasNext()) {
+                    Course course = iterator.next();
+                    iterator.remove();
                     course.decreaseCnt();
                 }
             }
