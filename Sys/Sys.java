@@ -378,13 +378,13 @@ public class Sys {
 
     private int getDegreeRank(String studentId) {
         if (studentId.startsWith("BY")) { // 博士
-            return 1;
-        } else if (studentId.startsWith("SY")) { // 学术硕士
-            return 2;
-        } else if (studentId.startsWith("ZY")) { // 专业硕士
-            return 3;
-        } else { // 本科生
             return 4;
+        } else if (studentId.startsWith("SY")) { // 学术硕士
+            return 3;
+        } else if (studentId.startsWith("ZY")) { // 专业硕士
+            return 2;
+        } else { // 本科生 最高优先级
+            return 1;
         }
     }
 
