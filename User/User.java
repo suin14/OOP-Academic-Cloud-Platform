@@ -1,15 +1,12 @@
 package User;
 
-import Course.*;
+import Course.Course;
 import Sys.Feedback;
 import Sys.Tools;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 public class User {
-    private static final long serialVersionUID = 1L;
 
     protected String id;
     protected String name;

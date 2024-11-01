@@ -17,5 +17,5 @@ public enum Command {
     listStudent,
     removeStudent,
     listCourseSchedule,
-    Other
+    InvalidCommand
 }

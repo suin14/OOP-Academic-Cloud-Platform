@@ -56,12 +56,10 @@ public class CourseList {
         System.out.println(Feedback.LIST_COURSE_SUCCESS);
     }
 
-    public boolean removeCourse(Course course) {
+    public void removeCourse(Course course) {
         if (hasCourse(course.getCourseID())) {
             courseList.remove(course.getCourseID());
-            return true;
         }
-        return false;
     }
 
     public Collection<Course> values() {

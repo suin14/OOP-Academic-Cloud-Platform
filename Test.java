@@ -23,7 +23,7 @@ public class Test {
             try {
                 Command cmd;
                 if (command.equals("switchUser")) {
-                    cmd = Command.valueOf("none");
+                    cmd = Command.InvalidCommand;
                 } else if (command.equals("switch")) {
                     cmd = Command.switchUser; // 将 "switch" 映射到 switchUser
                 } else {

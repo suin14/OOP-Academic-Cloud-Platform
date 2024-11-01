@@ -1,11 +1,12 @@
 package Course;
 
 
-import Sys.Feedback;
+import java.io.Serial;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
 public class Course implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private String courseID;
     private String courseName;
@@ -79,8 +80,6 @@ public class Course implements Serializable {
             double creditValue = Double.parseDouble(creditStr);
             DecimalFormat df = new DecimalFormat("#.0");
             this.credit = df.format(creditValue);
-        } else {
-            return;
         }
     }
 
@@ -100,18 +99,14 @@ public class Course implements Serializable {
         this.studentsCount = studentsCount;
     }
 
-    public void addStudent() {
-        this.studentsCount += 1;
-    }
-
     public boolean isFull() {
         return this.studentsCount >= 30;
     }
 
-    public void decreaseCnt() {
+    public void removeStudent() {
         this.studentsCount--;
     }
-    public void increaseCnt() {
+    public void addStudent() {
         this.studentsCount++;
     }
 }

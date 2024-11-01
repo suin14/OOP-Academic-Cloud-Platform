@@ -1,14 +1,12 @@
 package Sys;
 
-import Course.*;
+import Course.Course;
 import User.*;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Sys {
     private User currentUser;
@@ -194,7 +192,7 @@ public class Sys {
         }
 
         currentUser.selectCourse(c);
-        c.increaseCnt();
+        c.addStudent();
     }
 
     public void cancelCourse(String[] params) {
@@ -433,12 +431,12 @@ public class Sys {
                     System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
                     return;
                 }
-                c.decreaseCnt();
+                c.removeStudent();
             } else {
                 for (Course course : currentUser.getCourses()) {
                     if (student.removeCourse(course)) {
                         flag = true;
-                        course.decreaseCnt();
+                        course.removeStudent();
                     }
                 }
                 if (!flag) {
@@ -462,7 +460,7 @@ public class Sys {
                     System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
                     return;
                 }
-                c.decreaseCnt();
+                c.removeStudent();
             } else {
                 if (student.getCourses().size() == 0) {
                     System.out.println(Feedback.STUDENT_NOT_IN_COURSE);
@@ -472,7 +470,7 @@ public class Sys {
                 while (iterator.hasNext()) {
                     Course course = iterator.next();
                     iterator.remove();
-                    course.decreaseCnt();
+                    course.removeStudent();
                 }
             }
             System.out.println(Feedback.REMOVE_STUDENT_SUCCESS);
