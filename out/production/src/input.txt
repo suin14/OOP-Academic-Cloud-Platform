@@ -1,2 +1,10 @@
-register BY2137502 CCC Aa111@ Aa111@ Student
+register SY2237301 Hchc Aa333@ Aa333@ Student
+register ZY2337297 Hbhb Aa222@ Aa222@ Student
+register BY2137502 Haha Aa111@ Aa111@ Student
+register 00001 Tea_a Bb111$ Bb111$ Teacher
+login 00001 Bb111$
+createCourse OO 1_1-2 2.5 45
+login BY2137502 Aa111@
+selectCourse C-1
+listCourseSchedule
 quit

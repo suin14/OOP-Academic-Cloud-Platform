@@ -494,7 +494,7 @@ public class Sys {
                 return;
             }
 
-            if (t.checkId(id)) {
+            if (!t.checkId(id)) {
                 System.out.println(Feedback.ILLEGAL_USER_ID);
                 return;
             }
